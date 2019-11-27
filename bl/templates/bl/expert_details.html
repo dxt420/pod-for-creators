@@ -1,0 +1,363 @@
+{% extends "kitchen_brigade/base.html" %}
+
+{% block content %}
+
+
+  <!-- Begin page content -->
+  <main class="flex-shrink-0">
+
+
+        {% if messages %}
+
+        {% for message in messages %}
+    
+     
+
+        <div class="row">
+                <div class="container">
+                        <div 
+                        {% ifequal message.tags 'error' %}
+                            class="alert alert-danger" 
+                        {% else %}
+                            class="alert alert-{{ message.tags }}" 
+                        {% endifequal %}
+    
+    
+                        
+                    role="alert">
+                       
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                </div>
+        </div>
+        {% endfor %}
+    
+        {% endif %}
+
+
+
+
+        <div class="container-fluid" id="main-container">
+            <div class="row mb-4 bg-template-opacity">
+                  
+                <div class="container  py-4">
+                    <div class="row">
+                           
+                        <div class="col">
+                            <h5 class="font-weight-normal template-primary">Expert Profile</h5>
+                            <p class="text-secondary mb-0">control detailed information</p>
+                        </div>
+                        <div class="col-auto align-self-center">
+                            <!-- <a href="#" data-toggle="modal" data-target="#statusModal" class=" btn btn-sm btn-secondary">change status<i class="material-icons md-18 ml-1">radio_button_checked</i></a> -->
+                            <a href="#" data-toggle="modal" data-target="#editModal" class=" btn btn-sm btn-info">edit<i class="material-icons md-18 ml-1">edit</i></a>
+                            <a href="#" data-toggle="modal" data-target="#deleteModal" class=" btn btn-sm btn-danger">delete<i class="material-icons md-18 ml-1">delete</i></a>
+                         <!-- Modal -->
+                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                               
+                               
+                                <div class="modal-body">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-10 ">
+                                            <div class="row ">
+                                                <div class=" col-md-12">
+                                                    <div class="form-group ">
+                                                        <label>Are you sure you want to delete {{expert.full_name}} from Experts?</label>
+                                                  
+                                                    </div>
+                                                </div>
+                                               
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <a href={% url 'kitchen_brigade:deleteExpert' expert.id %} class="btn btn-danger">Delete</a>
+                                </div>
+                          
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+          
+
+            <!-- Modal -->
+            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="card-header gradient-success">
+                            <h5 class="modal-title" id="exampleModalLabel">edit info about this expert</h5>
+                          
+                        </div>
+                        
+                        <form action={% url 'kitchen_brigade:editExpert' %} method="post" enctype="multipart/form-data">  
+                            {% csrf_token %}  
+                            <input type="hidden" value="{{expert.id}}" name="expertid" />
+                        <div class="modal-body">
+                            <div class="row justify-content-center">
+                                <div class="col-md-10 ">
+                                    <div class="row ">
+                                        <div class=" col-md-12">
+                                            <div class="form-group ">
+                                                <label>Name</label>
+                                                <input name="full_name" value="{{expert.full_name}}" type="text" class="form-control" placeholder="" required> 
+                                            </div>
+                                        </div>
+                                      
+                                    </div>
+                                    <div class="row ">
+                                        <div class=" col-md-12">
+                                            <div class="form-group ">
+                                                <label>Email</label>
+                                                <input name="email" type="email" value="{{expert.email}}" class="form-control" placeholder="" required>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="row ">
+                                        <div class=" col-md-6">
+                                            <div class="form-group ">
+                                                <label>Expertise</label>
+                                                <select name="expert_type" class="form-control">
+                                                    <option 
+                                                        {% ifequal expert.expert_type 'chef' %} 
+                                                            selected
+                                                        {% endifequal %}>
+                                                        chef
+                                                    </option>
+                                                    <option 
+                                                        {% ifequal expert.expert_type 'mixologist' %} 
+                                                            selected
+                                                        {% endifequal %}>
+                                                        mixologist
+                                                    </option>
+                                                   
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class=" col-md-6">
+                                            <div class="form-group ">
+                                                <label>Phone</label>
+                                                <input name="phone" type="tel" value="{{expert.phone}}" class="form-control" placeholder="" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                  
+                                    
+                                 
+                                   
+                                    <div class="row ">
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="form-group ">
+                                                <label>Short Description</label>
+                                                <textarea name="description" class="form-control" rows="4">{{expert.description}}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row ">
+                                            <div class=" col-md-12">
+                                                <div class="form-group ">
+                                                    <label>Best Dish</label>
+                                                    <input name="best_dish" value="{{expert.best_dish}}" type="text" class="form-control" placeholder="" > 
+                                                </div>
+                                            </div>
+                                          
+                                        </div>
+                                    
+                                        <div class="row ">
+                                                <div class=" col-md-6">
+                                                    <div class="form-group ">
+                                                        <label>Rate</label>
+                                                        <input name="rate" value="{{expert.rate}}" type="text" class="form-control" placeholder="" > 
+                                                    </div>
+                                                </div>
+                                              
+                                           
+                                                    <div class=" col-md-6">
+                                                        <div class="form-group ">
+                                                            <label>Stationed at</label>
+                                                           
+                                                            <input name="station" value="{{expert.station}}" type="text" class="form-control" placeholder="" > 
+                                                        </div>
+                                                    </div>
+                                                  
+                                                </div>
+
+
+                                                <div class="row ">
+                                                        <div class=" col-md-12">
+                                                            <div class="form-group ">
+                                                                <label>Availability</label>
+                                                              
+                                                                <textarea name="availability" class="form-control" rows="4">{{expert.availability}}</textarea>
+                                                            </div>
+                                                        </div>
+                                                      
+                                                    </div>
+
+                                                    <div class="row ">
+                                                        <div class=" col-md-12">
+                                                            <div class="form-group ">
+                                                                <label>Facebook URL</label>
+                                                                <input name="fb" value="{{expert.fb}}" type="text" class="form-control" placeholder="" > 
+                                                            </div>
+                                                        </div>
+                                                      
+                                                    </div>
+
+                                                    <div class="row ">
+                                                        <div class=" col-md-12">
+                                                            <div class="form-group ">
+                                                                <label>Twitter URL</label>
+                                                                <input name="twitter" value="{{expert.twitter}}" type="text" class="form-control" placeholder="" > 
+                                                            </div>
+                                                        </div>
+                                                      
+                                                    </div>
+
+                                                    <div class="row ">
+                                                        <div class=" col-md-12">
+                                                            <div class="form-group ">
+                                                                <label>Youtube URL</label>
+                                                                <input name="youtube" value="{{expert.youtube}}" type="text" class="form-control" placeholder="" > 
+                                                            </div>
+                                                        </div>
+                                                      
+                                                    </div>
+
+                                                    <div class="row ">
+                                                        <div class=" col-md-12">
+                                                            <div class="form-group ">
+                                                                <label>Instagram URL</label>
+                                                                <input name="instagram" value="{{expert.instagram}}" type="text" class="form-control" placeholder="" > 
+                                                            </div>
+                                                        </div>
+                                                      
+                                                    </div>
+
+
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+
+
+          
+
+
+
+       
+
+            <div class="row">
+                    <div class="container">
+                        <div class="card shadow-sm border-0 mb-4">
+                            <div class="card-header p-0 overflow-hidden">
+                                <div class="row no-gutters align-items-center position-relative gradient-pink">
+                                    <figure class="background opacity">
+                                        <img src="/static/kitchen_brigade/assets/img/events1.jpg" alt="" class="">
+                                    </figure>
+                                    <div class="container p-4">
+                                        <div class="row align-items-center ">
+                                            <div class="col-12 col-sm-auto text-center">
+                                                <!-- <a href="profile.html">
+                                                    <figure class="avatar avatar-150 rounded-circle mx-auto my-3">
+                                                        <img src="/static/kitchen_brigade/assets/img/user3.jpg" alt="">
+                                                  
+                                                    </figure>
+                                                
+                                                </a> -->
+                                                <div class="avatar avatar-100 rounded-circle align-self-start bg-info text-white">{{expert.full_name.0}} </div>
+                                            </div>
+                                            <div class="col-12 col-sm text-center text-sm-left text-white">
+                                                <h3 class="mb-0">{{expert.full_name}} <span class="btn btn-outline-success btn-sm">Active</span></h3>
+                                                
+                                               
+                                                <p class="small">
+                                                    <i class="material-icons md-18 ml-1">star_border</i>
+                                                    <i class="material-icons md-18 ml-1">star_border</i>
+                                                    <i class="material-icons md-18 ml-1">star_border</i>
+                                                    <i class="material-icons md-18 ml-1">star_border</i>
+                                                    <i class="material-icons md-18 ml-1">star_border</i>
+                                                </p>
+                                                <!-- <p class=""></p> -->
+                                                <p class="small"><i class="material-icons">call</i> {{expert.phone}} <span class="mx-2">|</span> <i class="material-icons">mail_outline</i> {{expert.email}}</p>
+                                                <p class="">Best Dish:  {{expert.best_dish}}</p>
+                                              
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                  
+                            </div>
+                            <div class="card-footer mt-4">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="media media-sm">
+                                                <i class="material-icons text-mute-high mr-2">hourglass_full</i>
+                                                <div class="media-body">
+                                                    <h6 class="mb-0">0</h6>
+                                                    <a href="#" class="small">Tasks</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="media media-sm">
+                                                <i class="material-icons text-mute-high mr-2">money</i>
+                                                <div class="media-body">
+                                                    <h6 class="mb-0">0</h6>
+                                                    <a href="#" class="small">Total Earnings</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="media media-sm">
+                                                <i class="material-icons text-mute-high mr-2">comment</i>
+                                                <div class="media-body">
+                                                    <h6 class="mb-0">0</h6>
+                                                    <a href="#" class="small">Reviews</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body mt-4">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h6 class="page-subtitle"><span>About</span></h6>
+                                            <p class="text-mute-high">{{expert.description}}  </p>
+                                            <p><i class="material-icons text-mute">money</i> Rate: <span class="text-mute-high">{{expert.rate}} </span></p>
+                                        
+                                            <p><i class="material-icons text-mute">location_on</i> Stationed at: <span class="text-mute-high">{{expert.station}}</span></p>
+                                        </div>
+                                      
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+
+        </div>
+    </main>
+
+
+    {% endblock content %}

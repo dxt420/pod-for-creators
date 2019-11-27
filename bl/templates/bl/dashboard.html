@@ -1,0 +1,28 @@
+{% extends "bl/base.html" %}
+
+{% block content %}
+  
+  <!-- ############ Content START-->
+  <div id="content" class="flex">
+    <!-- ############ Main START-->
+    <div>
+        <div class="page-hero page-container" id="page-hero">
+            <div class="padding d-flex">
+                <div class="page-title">
+                    <h2 class="text-md text-highlight">Dashboard</h2><small class="text-muted">Welcome aboard,
+                        <strong>{{creator.artist_name}}</strong></small>
+                </div>
+                <div class="flex"></div>
+                <div><a href="#"
+                        class="btn btn-md text-muted"><span class="d-none d-sm-inline mx-1"> <span class="badge bg-success text-uppercase">Unlock</span> ProPod</span>
+                        <i data-feather="arrow-right"></i></a></div>
+            </div>
+        </div>
+        <div class="page-content page-container" id="page-content">
+          
+        </div>
+    </div><!-- ############ Main END-->
+</div><!-- ############ Content END-->
+
+
+{% endblock content %}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Element | Basik - Bootstrap 4 Web Application</title>
+    <meta name="description" content="Responsive, Bootstrap, BS4">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><!-- style -->
+    <link rel="stylesheet" href="/static/bl/assets/css/site.min.css">
+</head>
+
+<body>
+        <header id="header" class="page-header p-2 bg-white">
+            <div class="navbar navbar-expand-lg">
+                <!-- brand --> <a href="index.html" class="navbar-brand"> 
+                    <img src="/static/bl/assets/img/logo-light.png" alt="...">
+                    <!-- <span class="hidden-folded d-inline l-s-n-1x">Basik</span> </a> -->
+                    
+                    <!-- / brand -->
+                <!-- Navbar collapse -->
+             
+                <ul class="nav navbar-menu order-1 order-lg-2">
+                    <li class="nav-item"><a class="nav-link no-ajax"
+                            href="http://flatfull.com/themes/basik/docs/?hideAside=false">Guide</a></li>
+                    <li class="d-flex align-items-center"><a href="http://themeforest.net/user/flatfull" target="_blank"
+                            class="btn btn-rounded btn-sm btn-primary">Join</a></li><!-- Navarbar toggle btn -->
+                    <li class="nav-item d-lg-none"><a href="#" class="nav-link px-2" data-toggle="collapse"
+                            data-toggle-class data-target="#navbarToggler"><i data-feather="search"></i></a></li>
+                </ul>
+            </div>
+        </header>
+   
+    <div id="main" class="layout-column flex">
+       
+        <!-- ############ Content START-->
+        <div id="content" class="flex">
+            <!-- ############ Main START-->
+            <div>
+                <div class="page-hero page-container" id="page-hero">
+                    <div class="padding d-flex">
+                        <div class="page-title">
+                            <h2 class="text-md text-highlight">Complete Registration</h2><small class="text-muted">
+                                your are submitting a join request with the email {{request.user.email}} <a href={% url 'bl:changemailredirect' %} class="text-primary">Change</a></small>
+                        </div>
+                        <div class="flex"></div>
+                    
+                    </div>
+                </div>
+                <div class="page-content page-container" id="page-content">
+                    <div class="padding">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                    <form data-plugin="parsley" method="post" enctype="multipart/form-data"  action={% url 'bl:submitRegister' %} data-option="{}">
+
+                                            {% csrf_token %}  
+                                <div class="card">
+                                    <div class="card-header"><strong>Add Basic Info for Us to reach you easier</strong></div>
+                                    <div class="card-body">
+                                          
+
+
+                                        <div class="input-group input-group-lg mb-3">
+                                                <div class="input-group-prepend"><span class="input-group-text"
+                                                        id="inputGroup-sizing-lg">Name</span></div>
+                                                        
+                                                        <input type="text" required name="artist_name"
+                                                    class="form-control" aria-label="Name" placeholder="What should we call you"
+                                                    aria-describedby="inputGroup-sizing-sm">
+                                        </div>
+
+                                        <div class="input-group input-group-lg mb-3">
+                                                <div class="input-group-prepend"><span class="input-group-text"
+                                                        id="inputGroup-sizing-lg">Contact Email</span></div>
+                                                        
+                                                        <input type="email" required name="contact_email"
+                                                    class="form-control" aria-label="Name" placeholder="Email to keep in contact with you"
+                                                    aria-describedby="inputGroup-sizing-sm">
+                                        </div>
+
+
+                                        <div class="input-group input-group-lg mb-3">
+                                                <div class="input-group-prepend"><span class="input-group-text"
+                                                        id="inputGroup-sizing-lg"> Phone (Optional)</span></div>
+                                                        
+                                                   
+
+
+                                                    <input type="number" name="phone"
+                                                    class="form-control" placeholder="XXX XXXX XXX" >
+                                        </div>
+
+                                        <div class="checkcard"><label class="ui-check"><input type="checkbox"
+                                            name="check" checked="checked" required="true"><i></i> I agree
+                                        to the <a href="#" class="text-primary">Terms of Service</a></label>
+                                </div>
+                                <div class="text-right"><button type="submit"
+                                        class="btn btn-primary">Submit</button></div>
+                                    </div>
+                                </div>
+
+                            </form>
+                             
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div><!-- ############ Main END-->
+        </div><!-- ############ Content END-->
+        <!-- ############ Footer START-->
+        <div id="footer" class="page-footer hide">
+            <div class="d-flex p-3"><span class="text-sm text-muted flex">&copy; Copyright. flatfull.com</span>
+                <div class="text-sm text-muted">Version 1.1.2</div>
+            </div>
+        </div><!-- ############ Footer END-->
+    </div>
+    <script src="/static/bl/assets/js/site.min.js"></script>
+</body>
+
+</html>

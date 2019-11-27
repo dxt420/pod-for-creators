@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Element | Basik - Bootstrap 4 Web Application</title>
+    <meta name="description" content="Responsive, Bootstrap, BS4">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><!-- style -->
+    <link rel="stylesheet" href="/static/bl/assets/css/site.min.css">
+</head>
+
+<body>
+        <header id="header" class="page-header p-2 bg-white">
+            <div class="navbar navbar-expand-lg">
+                <!-- brand --> <a href="index.html" class="navbar-brand"> 
+                    <img src="/static/bl/assets/img/logo-light.png" alt="...">
+                    <!-- <span class="hidden-folded d-inline l-s-n-1x">Basik</span> </a> -->
+                    
+                    <!-- / brand -->
+                <!-- Navbar collapse -->
+             
+                <ul class="nav navbar-menu order-1 order-lg-2">
+                    <li class="nav-item"><a class="nav-link no-ajax"
+                            href="http://flatfull.com/themes/basik/docs/?hideAside=false">Guide</a></li>
+                            <li class="d-flex align-items-center"><a href={% url 'logout' %} 
+                                class="btn btn-rounded btn-sm btn-danger">Logout</a></li>
+                    <li class="nav-item d-lg-none"><a href="#" class="nav-link px-2" data-toggle="collapse"
+                            data-toggle-class data-target="#navbarToggler"><i data-feather="search"></i></a></li>
+                </ul>
+            </div>
+        </header>
+   
+    <div id="main" class="layout-column flex">
+       
+        <!-- ############ Content START-->
+        <div id="content" class="flex">
+            <!-- ############ Main START-->
+            <div>
+                <div class="page-hero page-container" id="page-hero">
+                    <div class="padding d-flex">
+                        <div class="page-title">
+                            <h2 class="text-md text-highlight">Pending Approval</h2><small class="text-muted">
+                                    You already submitted a join request with the email {{request.user.email}}, you shall receive an email in less than 2 days to guide you on the next steps and set up a secure Pod for Creators account  </small>
+                        </div>
+                        <div class="flex"></div>
+                    
+                    </div>
+                </div>
+                <div class="page-content page-container" id="page-content">
+                    <div class="padding">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                             
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div><!-- ############ Main END-->
+        </div><!-- ############ Content END-->
+        <!-- ############ Footer START-->
+        <div id="footer" class="page-footer hide">
+            <div class="d-flex p-3"><span class="text-sm text-muted flex">&copy; Copyright. flatfull.com</span>
+                <div class="text-sm text-muted">Version 1.1.2</div>
+            </div>
+        </div><!-- ############ Footer END-->
+    </div>
+    <script src="/static/bl/assets/js/site.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+My songs
+
+<br>
+{% for song in mysongs  %}
+
+
+<a href={% url 'bl:songdetail' song.song_id %}>{{ song.file_url }}</a>
+{% endfor %}
+
+
+<!-- <a href={% url 'bl:logout' %}>Logout</a> -->

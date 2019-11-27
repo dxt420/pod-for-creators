@@ -1,0 +1,30 @@
+Hello there, you are logged in with '{{request.user.email}}'
+<br>
+<a href={% url 'bl:logout' %}>Logout</a>
+
+Artist Name
+***Write a name that will be queried on submit and tell of name taken
+
+Contact Email
+***Use my logged in gmail
+***Add another Email
+
+
+Contact Phone
+***we will call you
+
+
+<form action={% url 'bl:submitRegister' %} method="post" enctype="multipart/form-data">  
+    {% csrf_token %}  
+
+
+Artist Name:<input name="artist_name" type="text" required> 
+
+Contact Email: <input name="contact_email" type="email" required> 
+
+Contact Phone:<input name="phone" type="text" required> 
+
+
+<button type="submit">Save</button>
+
+</form>

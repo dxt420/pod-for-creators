@@ -1,0 +1,73 @@
+{% extends "kitchen_brigade/base.html" %}
+
+{% block content %}
+
+<main class="flex-shrink-0">
+        <div class="container-fluid" id="main-container">
+            <div class="row">
+              
+               
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <div class="card shadow-sm border-0 mb-4 overflow-hidden">
+                                    <div class="card-header">
+                                            <div class="row">
+                                                <div class="col">
+                                                        <h3 class="">Experts</h3>
+                                                </div>
+                                                <div class="col-auto align-self-center">
+                                                        <a href={% url 'kitchen_brigade:experts' %} class="btn btn-info btn-sm">explore</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                <div class="card-body p-0">
+                                    <div class="row no-gutters">
+                                        <div class="col-7 p-3">
+                                          
+                                            <h2><span class="font-weight-light">{{experts_count}}</span> <small></small></h2>
+                                            <p><span class="text-success"></span> <span class="text-mute-high">chefs and mixologists </span></p>
+                                        </div>
+                                        <div class="col-5">
+                                            <img src="/static/kitchen_brigade/assets/img/laptopwoman.png" alt="" class="right-img float-right mnh-100 mw-100">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="card shadow-sm border-0 mb-4 gradient-pink overflow-hidden">
+                                    <div class="card-header">
+                                            <div class="row">
+                                                <div class="col">
+                                                        <h3 class="">Clients</h3>
+                                                </div>
+                                                <div class="col-auto align-self-center">
+                                                        <button class="btn btn-info btn-sm">explore</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                <div class="card-body p-0">
+                                    <div class="row no-gutters">
+                                        <div class="col-6 p-3">
+                                           
+                                            <h2><span class="font-weight-light">0</span> </h2>
+                                            <p><span></span> <span class="text-mute-high">mobile app users</span></p>
+                                        </div>
+                                        <div class="col-6">
+                                            <img src="/static/kitchen_brigade/assets/img/bank.png" alt="" class="right-img float-right mnh-100 mw-100">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             
+            </div>
+          
+        </div>
+    </main>
+
+
+    {% endblock content %}

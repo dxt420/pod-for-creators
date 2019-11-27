@@ -1,0 +1,81 @@
+
+
+
+{% extends "bl/base.html" %}
+
+{% block content %}
+
+  <!-- ############ Content START-->
+  <div id="content" class="flex">
+    <!-- ############ Main START-->
+    <div>
+        <div class="page-hero page-container" id="page-hero">
+            <div class="padding d-flex">
+                <div class="page-title">
+                    <h2 class="text-md text-highlight">My Tracks</h2><small class="text-muted">
+                        All your pod tracks here
+                    </small>
+                </div>
+                <div class="flex"></div>
+             
+            </div>
+        </div>
+        <div class="page-content page-container" id="page-content">
+            <div class="padding">
+                <div class="table-responsive">
+                    <table id="datatable" class="table table-theme table-row v-middle" data-plugin="dataTable">
+                        <thead>
+                            <tr>
+                                <th><span class="text-muted">ID</span></th>
+                                <th><span class="text-muted">Cover Art</span></th>
+                                <th><span class="text-muted">Title</span></th>
+                                <th><span class="text-muted d-none d-sm-block">Plays</span></th>
+                                <th><span class="text-muted d-none d-sm-block">Favorites</span></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          
+                            {% for song in mysongs  %}
+                            <tr class="" data-id="1">
+                                <td style="min-width:30px;text-align:center"><small class="text-muted">1</small>
+                                </td>
+                                <td><a href="#"><span class="w-32 avatar gd-primary"><img
+                                                src="../assets/img/a1.jpg" alt="."></span></a></td>
+                                <td class="flex"><a href="#" class="item-title text-color">
+                                        {{ song.title }}   
+                                </a>
+                                    <div class="item-except text-muted text-sm h-1x">
+                                        <!-- Description -->
+
+                                    </div>
+                                </td>
+                                <td><span class="item-amount d-none d-sm-block text-sm">210</span></td>
+                                <td><span class="item-amount d-none d-sm-block text-sm [object Object]">5</span>
+                                </td>
+                                <td>
+                                    <div class="item-action dropdown"><a href="#" data-toggle="dropdown"
+                                            class="text-muted"><i data-feather="more-vertical"></i></a>
+                                        <div class="dropdown-menu dropdown-menu-right bg-black" role="menu"><a
+                                                class="dropdown-item" href="#">See detail </a><a
+                                                class="dropdown-item download">Download </a><a
+                                                class="dropdown-item edit">Edit</a>
+                                            <div class="dropdown-divider"></div><a
+                                                class="dropdown-item trash">Delete item</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            {% endfor %}
+                       
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div><!-- ############ Main END-->
+</div><!-- ############ Content END-->
+
+
+{% endblock content %}
