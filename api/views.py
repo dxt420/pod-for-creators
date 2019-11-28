@@ -52,6 +52,25 @@ class ArtistSongsCreateView(generics.ListCreateAPIView):
         queryset = queryset.filter(added_by=name)
         return queryset
 
+
+class ArtistSongsView(generics.RetrieveUpdateDestroyAPIView):
+
+    queryset = Song.objects.all()
+    serializer_class = SongSerializer
+    lookup_field = 'added_by'
+
+    # def get_queryset(self):
+    #     queryset = Song.objects.filter(artist_name=self.request.query_params.get('artist_username'))
+    #     return queryset
+
+    # def get_queryset(self):
+ 
+    #     queryset = Song.objects.all()
+    #     name = self.request.query_params.get('artist_username', None)
+    #     # if username is not None:
+    #     queryset = queryset.filter(added_by=name)
+    #     return queryset
+
 class SongDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     queryset = Song.objects.all()
