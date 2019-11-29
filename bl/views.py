@@ -430,14 +430,23 @@ def addsong(request):
         storage.child("files/"+ss).put(filer2 + '/' + new_file_2.theFile.url)
         song_url = storage.child("files/"+s).get_url(request.user.id)
 
-        song = Song(title=request.POST['title'],file_url=song_url,cover=cover_file_data_url,added_by=request.user.username,plays="0")
+        song = Song(file_url=song_url,plays="0")
         song.save()
 
+        print(Creator.objects.get(username=request.user.username))
+
+        single = Single(title=request.POST['title'],cover=cover_file_data_url,added_by=request.user.username,artist_name=Creator.objects.get(username=request.user.username))
+        
+        single.save()
+
+        single.songs.add(song)
     
+
+        single.save()
     
   
         context = {
-            'name': song.title
+            'name': single.title
             
         }
 

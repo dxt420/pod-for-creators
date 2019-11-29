@@ -27,6 +27,16 @@ class ListenerDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Listener.objects.all()
     serializer_class = ListenerSerializer
 
+class PlaylistCreateView(generics.ListCreateAPIView):
+   
+    queryset = Playlist.objects.all()
+    serializer_class = PlaylistSerializer
+
+class PlaylistDetailView(generics.RetrieveUpdateDestroyAPIView):
+
+    queryset = Playlist.objects.all()
+    serializer_class = PlaylistSerializer
+
 
 class SongCreateView(generics.ListCreateAPIView):
 

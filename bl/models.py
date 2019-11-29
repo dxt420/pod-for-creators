@@ -21,7 +21,7 @@ class Creator(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
    
     def __str__(self):
-        return self.email
+        return self.artist_name
 
 class Listener(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -48,45 +48,67 @@ class Listener(models.Model):
 #         return self.username
 
 
-class Playlist(models.Model):
-    playlist_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    publisher = models.CharField(max_length=50,blank=True)
-    title = models.CharField(max_length=50,blank=True)
-    description = models.CharField(max_length=500,blank=True)
-    cover = models.FileField(upload_to='media/files/playlistCovers/',default='aa',blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-class PlaylistSong(models.Model):
-    playlist_id = models.CharField(max_length=50,blank=True)
-    song_id = models.CharField(max_length=50,blank=True)
-
-class AlbumSong(models.Model):
-    playlist_id = models.CharField(max_length=50,blank=True)
-    song_id = models.CharField(max_length=50,blank=True)
-  
-
-class Album(models.Model):
-    user_id = models.CharField(max_length=50,blank=True)
-    title = models.CharField(max_length=50,blank=True)
-    year = models.CharField(max_length=50,blank=True)
-    cover = models.FileField(upload_to='media/files/albumCovers/',default='aa',blank=True)
-    description = models.CharField(max_length=500,blank=True)
-    artist_name = models.CharField(max_length=50,blank=True)
-    
 
 
 class Song(models.Model):
     song_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    title = models.CharField(max_length=50,blank=True)
-    artist_name = models.CharField(max_length=50,blank=True)
-    features = models.CharField(max_length=50,blank=True)
-    year = models.CharField(max_length=50,blank=True)
     file_url = models.CharField(max_length=150,blank=True)
-    added_by = models.CharField(max_length=50,blank=True)
-    status = models.CharField(max_length=50,blank=True)
-    # cover = models.FileField(upload_to='media/files/albumCovers/',default='aa',blank=True) #blank is true since if its album song, we'll add it from album cover so if an artist wantss to add an album they'll first either add album info plus all the rest of info before submitting the audio files or the easy option of adding a zip or multiple selection that on backend side should be able to extract info, actually all songss will ahve this option first
-    cover = models.CharField(max_length=150,blank=True)
     plays = models.CharField(max_length=50,blank=True)
+  
+
+class Album(models.Model):
+    album_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    title = models.CharField(max_length=50,blank=True)
+    year = models.CharField(max_length=50,blank=True)
+    cover = models.CharField(max_length=150,blank=True)
+    description = models.CharField(max_length=500,blank=True)
+    artist_name = models.ForeignKey('Creator', on_delete=models.CASCADE)
+    features = models.CharField(max_length=150,blank=True)
+    # features will be many to many also with option to invite 
+    # artist thru social media platforms when a signed up artist adding feautures
+    added_by = models.CharField(max_length=50,blank=True)
+    songs = models.ManyToManyField('Song')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+class Single(models.Model):
+    single_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    title = models.CharField(max_length=50,blank=True)
+    year = models.CharField(max_length=50,blank=True)
+    cover = models.CharField(max_length=150,blank=True)
+    description = models.CharField(max_length=500,blank=True)
+    artist_name = models.ForeignKey('Creator', on_delete=models.CASCADE)
+    features = models.CharField(max_length=150,blank=True)
+    # features will be many to many also with option to invite 
+    # artist thru social media platforms when a signed up artist adding feautures
+    added_by = models.CharField(max_length=50,blank=True)
+    songs = models.ManyToManyField('Song')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title + ' - ' + self.artist_name.artist_name
+    
+
+
+class Playlist(models.Model):
+    playlist_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    publisher_id = models.CharField(max_length=50,blank=True)
+    title = models.CharField(max_length=50,blank=True)
+    description = models.CharField(max_length=500,blank=True)
+    cover = models.CharField(max_length=150,blank=True)
+    songs = models.ManyToManyField('Song')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+
+
+
+
+
 
 
 class SongTag(models.Model):
