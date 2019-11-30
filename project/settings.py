@@ -25,7 +25,7 @@ SECRET_KEY = 'n(_zb+=j2or8tjm16-@^-nmn1kyn3rl2fbglnw)c5w%5pl=hzh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['pod.pythonanywhere.com','localhost']
 
 
 # Application definition
@@ -179,7 +179,7 @@ LOGOUT_URL = 'logout'
 
 
 
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 

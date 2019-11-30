@@ -290,19 +290,15 @@ def gettags(request):
             
             try:
               
-                with open(settings.MEDIA_ROOT + '/' + f.name, 'wb+') as destination:
+                with open('media/' + f.name, 'wb+') as destination:
                     for chunk in f.chunks():
                         destination.write(chunk)
 
                 
-                tag = TinyTag.get(settings.MEDIA_ROOT + '/' + f.name,image=True)
+                tag = TinyTag.get('media/' + f.name,image=True)
                 image_data = tag.get_image()
-                # print('Image Dta:  %s.' % image_data)
-
                 print('This track is by %s.' % tag.artist)
                 print('It is %f seconds long.' % tag.duration)
-
-                # tmpimg = None
                 cover = None
                
                 if image_data:
