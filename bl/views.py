@@ -316,11 +316,6 @@ def gettags(request):
                     print("No cover for this one")
                 
          
-                
-               
-                
-                
-                
 
                 context = {
                     'form': True,
@@ -358,13 +353,7 @@ def gettags(request):
         return JsonResponse({'form': True,"d":"Drunk"}, safe=False)
         
 
-        # tag = TinyTag.get(filename,image=True)
-        # image_data = tag.get_image()
-        # print('Image Dta:  %s.' % image_data)
 
-        # print('This track is by %s.' % tag.artist)
-        # print('It is %f seconds long.' % tag.duration)
-        # return JsonResponse({'form': True,"d":"Drunk"}, safe=False)
     
     else:
         print("Wtf No hit")
