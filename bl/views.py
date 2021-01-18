@@ -699,7 +699,7 @@ def submitRegister(request):
         creator.save()
 
         user = User.objects.get(username="admin")
-        notify.send(request.user, recipient=user, actor=request.user, verb='Join Request from '+request.POST['artist_name'], nf_type='followed_by_one_user')
+        notify.send(request.user, recipient=user, actor=request.user, verb='Join Request from '+request.POST['creator_name'], nf_type='followed_by_one_user')
 
 
         # except Creator.DoesNotExist:
@@ -721,7 +721,7 @@ def addsong(request):
         
         dataUrlPattern = re.compile('data:image/(png|jpeg);base64,(.*)$')
         print("hiiii")
-        print(request.POST)
+        # print(request.POST)
         if request.POST['imageUpload']:
             
             ImageData = request.POST['imageUpload']
