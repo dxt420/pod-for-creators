@@ -735,6 +735,8 @@ def addsong(request):
             filer = re.sub('media', '', settings.MEDIA_ROOT)
             storage.child("files/"+s).put(filer + '/' + new_file.theFile.url)
             cover_file_data_url = storage.child("files/"+s).get_url(request.user.id)
+            new_file.theFile.delete()
+            new_file.save()
         else:
             cover_file_data_url = ""
 
@@ -751,6 +753,12 @@ def addsong(request):
         filer2 = re.sub('media', '', settings.MEDIA_ROOT)
         storage.child("files/"+ss).put(filer2 + '/' + new_file_2.theFile.url)
         song_url = storage.child("files/"+ss).get_url(request.user.id)
+        new_file_2.theFile.delete()
+        new_file_2.save()
+        
+        
+        
+
 
         upload = Upload(file_url=song_url,reveiwed_by_admin="false")
         upload.save()
