@@ -1,0 +1,614 @@
+{% csrf_token %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta Data -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pod</title>
+
+    <!-- Fav Icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/bl/assets/img/fav-icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/bl/assets/img/fav-icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/bl/assets/img/fav-icons/favicon-16x16.png">
+    <meta name="theme-color" content="#e43a90">
+
+    <!-- Dependency Styles -->
+    <link rel="stylesheet" href="/static/bl/dependencies/bootstrap/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/static/bl/dependencies/intro/css/stylesheet.css" type="text/css">
+    <link rel="stylesheet" href="/static/bl/dependencies/swiper/swiper.min.css" type="text/css">
+    <!-- <link rel="stylesheet" href="/static/bl/dependencies/font-awesome/css/font-awesome.min.css" type="text/css"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        type="text/css">
+
+    <link rel="stylesheet" href="/static/bl/dependencies/wow/css/animate.css" type="text/css">
+    <link rel="stylesheet" href="/static/bl/dependencies/magnific-popup/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="/static/bl/dependencies/jquery-ui/css/jquery-ui.css" type="text/css">
+    <link rel="stylesheet" href="/static/bl/dependencies/slick-carousel/css/slick.css" type="text/css">
+    <link rel="stylesheet" href="/static/bl/dependencies/colornip/css/colornip.min.css" type="text/css">
+    <link rel="stylesheet" href="/static/bl/dependencies/css-loader/css/css-loader.css" type="text/css">
+
+    <!-- Site Stylesheet -->
+    <link rel="stylesheet" href="/static/bl/assets/css/woocommerce.css" type="text/css">
+    <link rel="stylesheet" href="/static/bl/assets/css/app.css" type="text/css">
+
+
+<!-- START OF reCaptcha settings -->
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&amp;render=explicit" async="" defer=""></script>
+<script type="text/javascript" defer="">
+    var onloadCallback = function(){
+        grecaptcha.render("gReCaptcha",{
+            "sitekey": "6LdHrN8UAAAAABi9eRSOwp5dCgh9WE8tWvUnFAUn",
+            "badge": "inline",
+            "type": "image",
+            "size": "invisible",
+            "callback": onSubmit
+        });
+    };
+
+    var onSubmit = function(token){
+        done();
+    }
+
+    function validate(event){
+        if (isRequiredFieldsPass()){
+            event.preventDefault();
+            grecaptcha.execute();
+        }
+    }
+</script>
+<!-- END OF reCaptcha settings -->
+    <style>
+        body {
+            margin: 0;
+            background:url("/static/bl/media/background/bg5.jpg");
+            /* background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url("/static/bl/media/background/bg5.jpg"); */
+            font-family: "Roboto", sans-serif;
+        }
+
+        h1 {
+            position: relative;
+            color: #fff;
+            opacity: 0;
+            transition: 0.8s ease-in-out;
+        }
+
+        #progress {
+            position: absolute;
+            /* background: yellow; */
+            background: url("/static/bl/media/background/bg5.jpg");
+            height: 100vh;
+            width: 0;
+            transition: width 0.2s ease-in-out;
+        }
+
+        .center {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /******
+  Form
+ ******/
+
+        #register {
+            background: #fff;
+            position: relative;
+            width: 410px;
+            padding: 2px 15px 20px 15px;
+            box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
+                0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
+            transition: transform 0.1s ease-in-out;
+        }
+
+        #register.close {
+            width: 0;
+            padding: 0;
+            overflow: hidden;
+            transition: 0.8s ease-in-out;
+            box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0);
+        }
+
+        .next {
+            position: absolute;
+            right: 20px;
+            bottom: 10px;
+            font-size: 40px;
+            color: #25a3ff;
+            float: right;
+            cursor: pointer;
+        }
+
+        .next:hover {
+            color: #333;
+        }
+
+        .wrong .next {
+            color: #ff2d26;
+        }
+
+        .close .next {
+            color: #fff;
+        }
+
+        #inputContainer {
+            position: relative;
+            opacity: 0;
+            width: 350px;
+            margin-top: 25px;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        #inputContainer input {
+            width: 100%;
+            padding: 0 5px;
+            border: none;
+            font-size: 20px;
+            font-weight: bold;
+            outline: 0;
+            background: transparent;
+            box-shadow: none;
+        }
+
+        #inputLabel {
+            position: absolute;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 0 5px;
+            transition: 0.2s ease-in-out;
+        }
+
+        #inputContainer input:valid+#inputLabel {
+            top: -15px;
+            font-size: 11px;
+            font-weight: normal;
+            color: #9e9e9e;
+        }
+
+        #inputProgress {
+            position: absolute;
+            border-bottom: 2px solid #25a3ff;
+            padding: 3px 0;
+            width: 0;
+            transition: width 0.6s ease-in-out;
+        }
+
+        .wrong #inputProgress {
+            border-color: #ff2d26;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 768px) {
+    .omb_row-sm-offset-3 div:first-child[class*="col-"] {
+        margin-left: 25%;
+    }
+}
+
+.omb_login .omb_authTitle {
+    text-align: center;
+	line-height: 300%;
+}
+	
+.omb_login .omb_socialButtons a {
+	/* color: white; // In yourUse @body-bg  */
+	opacity:0.9;
+}
+.omb_login .omb_socialButtons a:hover {
+    color: white;
+	opacity:1;    	
+}
+.omb_login .omb_socialButtons .omb_btn-facebook {background: #3b5998;}
+.omb_login .omb_socialButtons .omb_btn-twitter {background: #00aced;}
+.omb_login .omb_socialButtons .omb_btn-google {background: #c32f10;}
+
+
+.omb_login .omb_loginOr {
+	position: relative;
+	font-size: 1.5em;
+	color: #aaa;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+}
+.omb_login .omb_loginOr .omb_hrOr {
+	background-color: #cdcdcd;
+	height: 1px;
+	margin-top: 0px !important;
+	margin-bottom: 0px !important;
+}
+.omb_login .omb_loginOr .omb_spanOr {
+	display: block;
+	position: absolute;
+	left: 50%;
+	top: -0.6em;
+	margin-left: -1.5em;
+	background-color: white;
+	width: 3em;
+	text-align: center;
+}			
+
+.omb_login .omb_loginForm .input-group.i {
+	width: 2em;
+}
+.omb_login .omb_loginForm  .help-block {
+    color: red;
+}
+
+	
+@media (min-width: 768px) {
+    .omb_login .omb_forgotPwd {
+        text-align: right;
+		margin-top:10px;
+ 	}		
+}
+    </style>
+
+
+
+</head>
+
+
+
+<div id="progress"></div>
+
+
+
+<!--=========================-->
+<!--=        Navbar         =-->
+<!--=========================-->
+<header class="header header-magic-line">
+    <div class="header-inner">
+        <div class="tim-container clearfix">
+            <div class="header-magic-line-inner clearfix">
+                <div id="site-logo" style="text-align: center;">
+                    <a href="index.html" class="logo-main">
+                        <img src="/static/bl/assets/img/logo_5.png" alt="logo">
+                    </a>
+
+                    <a href="index.html" class="logo-stickky">
+                        <img src="/static/bl/assets/img/logo_5.png" alt="logo">
+                    </a>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div style="background-color: transparent;align-items: center;    display: flex;justify-content: center;" class=" subscribe-two">
+           
+     
+                
+                <a href="{% url 'social:begin' 'facebook' %}" class="button">Sign Up with Facebook</a>
+                &nbsp;     &nbsp;     &nbsp;     &nbsp;     &nbsp;     &nbsp;     &nbsp;     &nbsp;
+                <a href="{% url 'social:begin' 'google-oauth2' %}" class="button">Sign Up with Google</a>
+
+                
+           
+
+
+           
+   
+        <!-- /.subscribe-two -->
+    </div>
+        <!-- /.tim-container -->
+    </div>
+    <!-- /.header-inner -->
+</header>
+<!-- /#header -->
+
+
+
+
+
+
+
+ <!-- reCaptcha place holder-->
+ <!-- <div id="gReCaptcha"></div>
+
+<div class="center banner-five">
+
+   
+
+
+   
+    <div id="register">
+
+        <i id="progressButton" class="ion-android-arrow-forward next"></i>
+
+        <div id="inputContainer">
+            <input id="inputField" required autofocus />
+            <label id="inputLabel"></label>
+            <div id="inputProgress"></div>
+        </div>
+
+    </div>
+
+      
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- /#site -->
+<!-- Dependency Scripts -->
+<script src="/static/bl/dependencies/jquery/jquery.min.js"></script>
+<script src="/static/bl/dependencies/jquery-ui/jquery-ui.min.js"></script>
+<script src="/static/bl/dependencies/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/bl/dependencies/swiper/js/swiper.min.js"></script>
+<script src="/static/bl/dependencies/swiperRunner/swiperRunner.min.js"></script>
+<script src="/static/bl/dependencies/wow/js/wow.min.js"></script>
+<script src="/static/bl/dependencies/jquery.countdown/jquery.countdown.min.js"></script>
+<script src="/static/bl/dependencies/magnific-popup/js/jquery.magnific-popup.min.js"></script>
+<script src="/static/bl/dependencies/jquery.spinner/js/jquery.spinner.js"></script>
+<script src="/static/bl/dependencies/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="/static/bl/dependencies/masonry-layout/masonry.pkgd.min.js"></script>
+<script src="/static/bl/dependencies/imagesloaded/imagesloaded.pkgd.min.js"></script>
+<script src="/static/bl/dependencies/slick-carousel/js/slick.min.js"></script>
+<script src="/static/bl/assets/js/headroom.js"></script>
+
+
+<script src="/static/bl/assets/js/smoke.js"></script>
+<script src="/static/bl/dependencies/FitText.js/js/jquery.fittext.js"></script>
+<script src="/static/bl/dependencies/gmap3/js/gmap3.min.js"></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenMax.min.js'></script>
+<script src='/static/bl/dependencies/tilt.js/js/tilt.jquery.js'></script>
+<script src='/static/bl/assets/js/parallax.min.js'></script>
+<!-- Player -->
+<script src="/static/bl/dependencies/jPlayer/js/jquery.jplayer.min.js"></script>
+<script src="/static/bl/dependencies/jPlayer/js/jplayer.playlist.min.js"></script>
+<script src="/static/bl/assets/js/myplaylist.js"></script>
+
+
+<!--Google map api -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsBrMPsyNtpwKXPPpG54XwJXnyobfMAIc"></script>
+
+<!-- Site Scripts -->
+<script src="/static/bl/assets/js/app.js"></script>
+
+
+
+<script>
+    // Forked from: https://codepen.io/arcs/pen/OmZaex
+    var questions = [{
+            question: "Or use your email?",
+            pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        },
+        {
+            question: "What should we call you?"
+        },
+        {
+            question: "Create a strong password",
+            type: "password"
+        }
+    ];
+
+    (function () {
+        var tTime = 100; // transition transform time from #register in ms
+        var wTime = 200; // transition width time from #register in ms
+        var eTime = 1000; // transition width time from inputLabel in ms
+
+        // init
+        // --------------
+        var position = 0;
+
+        putQuestion();
+
+        progressButton.addEventListener("click", validate);
+        inputField.addEventListener("keyup", function (e) {
+            transform(0, 0); // ie hack to redraw
+            if (e.keyCode == 13) validate();
+        });
+
+        // functions
+        // --------------
+
+        // load the next question
+        function putQuestion() {
+            inputLabel.innerHTML = questions[position].question;
+            inputField.value = "";
+            inputField.type = questions[position].type || "text";
+            inputField.focus();
+            showCurrent();
+        }
+
+        // when submitting the current question
+        function validate() {
+            // set the value of the field into the array
+            questions[position].value = inputField.value;
+
+            // check if the pattern matches
+            if (!inputField.value.match(questions[position].pattern || /.+/)) wrong();
+           
+            else
+                ok(function () {
+                    // set the progress of the background
+                    progress.style.width = (++position * 100) / questions.length + "vw";
+
+                    // if there is a new question, hide current and load next
+                    if (questions[position]) hideCurrent(putQuestion);
+                    else hideCurrent(done);
+                });
+        }
+
+        // helper
+        // --------------
+
+        function hideCurrent(callback) {
+            inputContainer.style.opacity = 0;
+            inputProgress.style.transition = "none";
+            inputProgress.style.width = 0;
+            setTimeout(callback, wTime);
+        }
+
+        function showCurrent(callback) {
+            inputContainer.style.opacity = 1;
+            inputProgress.style.transition = "";
+            inputProgress.style.width = "100%";
+            setTimeout(callback, wTime);
+        }
+
+        function transform(x, y) {
+            register.style.transform = "translate(" + x + "px ,  " + y + "px)";
+        }
+
+        function ok(callback) {
+            register.className = "";
+            setTimeout(transform, tTime * 0, 0, 10);
+            setTimeout(transform, tTime * 1, 0, 0);
+            setTimeout(callback, tTime * 2);
+        }
+
+        function wrong(callback) {
+            register.className = "wrong";
+            for (
+                var i = 0; i < 6; i++ // shaking motion
+            )
+                setTimeout(transform, tTime * i, ((i % 2) * 2 - 1) * 20, 0);
+            setTimeout(transform, tTime * 6, 0, 0);
+            setTimeout(callback, tTime * 7);
+        }
+    })();
+
+    var SHEET_API_URL =
+        "https://script.google.com/macros/s/AKfycbyYokzkOBXEhFutD0AB4FsnAP73WVkK8GjX3TTsXgNZjma89XLy/exec";
+
+    function show_done() {
+        var eTime = 1000;
+        var h1 = document.createElement("h1");
+        h1.appendChild(
+            document.createTextNode(
+                "Thank you for registering " + questions[1].value + "!"
+            )
+        );
+        setTimeout(function () {
+            register.parentElement.appendChild(h1);
+            setTimeout(function () {
+                h1.style.opacity = 1;
+            }, 50);
+        }, eTime);
+    }
+    function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+    // when all the questions have been answered
+    function done() {
+        // remove the box if there is no next question
+        register.className = "close";
+
+
+        console.log($("[name='g-recaptcha-response']"));
+
+        var sheet_data = {
+            Name: questions[1].value,
+            Email: questions[0].value,
+            Password: questions[2].value
+            // Recaptcha: $("[name='g-recaptcha-response']")
+        };
+        // Calling the API
+        var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+        var jqxhr = $.ajax({
+            url: "{% url 'bl:register_view' %}",
+            method: "POST",
+            dataType: "json",
+            data: sheet_data,
+            // success: function (response) {
+            //     // add the h1 at the end with the welcome text
+            //     show_done();
+            // },
+
+            success: function(jResults)
+            {
+                console.log(jResults)
+                show_done();
+                // Reload reCaptcha
+                grecaptcha.reset();
+                // myutils.btnReCaptcha("btnSignUp");÷
+
+                // $("#btnSignUp").html($("#btnSignUp").data('original-text')); //stop animation and switch back to original text
+
+                if(jResults.alert_type =='success'){
+                    // swal(jResults.alert_title, jResults.alert_msg, jResults.alert_type);
+                    location.assign(BASE_URL + "account_activation_sent");
+                    console.log("1111");
+                }
+                else {
+                    console.log("000");
+                    var strErr = jResults.alert_msg + '';
+                    strErr = strErr.split(",").pop();
+                    // swal(jResults.alert_title, strErr, jResults.alert_type);
+                }
+            },
+
+
+      
+          
+            cache: false,
+            dataType: "json",
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+                //Start displaying button's working animation
+                // var loadingText = '<i class="fa fa-circle-o-notch fa-spin"></i> working...';
+                // if ($("#btnSignUp").html() !== loadingText) {
+                //     $("#btnSignUp").data('original-text', $("#btnSignUp").html());
+                //     $("#btnSignUp").html(loadingText);
+                // }
+            },
+        });
+    }
+
+
+
+
+
+
+
+
+
+    
+
+
+
+   
+</script>
+</body>
+
+</html>

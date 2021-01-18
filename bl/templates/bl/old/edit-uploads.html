@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<!-- 
+Template Name: Tunein
+Version: 1.0.0
+Author:Webstrot 
+
+-->
+<!--[if !IE]><!-->
+<html lang="zxx">
+<!--[endif]-->
+
+<head>
+    <meta charset="utf-8" />
+    <title>Tunein Responsive HTML Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="description" content="Tunein,music,song" />
+    <meta name="keywords" content="Tunein,music,song" />
+    <meta name="author" content="" />
+    <meta name="MobileOptimized" content="320" />
+    <!--Template style -->
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/animate.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/fonts.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/flaticon.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/nice-select.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/swiper.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/magnific-popup.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/responsive.css" />
+    <!--favicon-->
+    <link rel="shortcut icon" type="image/png" href="/static/bl/images/favicon.png" />
+    
+
+    <link href="/static/bl/plugins/dropify/css/dropify.min.css" rel="stylesheet">
+	
+	<style>
+		@font-face { font-family: 'myfont';
+             src: url('/static/bl/fonts/josefin-sans/JosefinSans-Regular.ttf') format('truetype'); }
+		*{
+			/* font-family: josefin sans,sans-serif !important; */
+
+			font-family: 'myfont';
+		}
+	</style>
+</head>
+
+<body>
+    <!-- preloader Start -->
+    <div id="preloader">
+        <div id="status">
+            <img src="/static/bl/images/loader.gif" id="preloader_image" alt="loader">
+        </div>
+    </div>
+    <div class="cursor"></div>
+    <!-- top navi wrapper Start -->
+    <div class="m24_main_wrapper">
+   
+        <!-- top navi wrapper end -->
+        <div class="m24_navi_main_wrapper index2_main_header index3_main_header m24_cover">
+            <div class="container-fluid">
+                <div class="m24_logo_wrapper">
+                    <div class="m24_logo_div">
+                        <a href="index.html">
+                            <img src="/static/bl/images/logo3.png" alt="logo">
+                        </a>
+                    </div>
+                    
+                </div>
+
+                <div class="m24_header_right_Wrapper d-none d-sm-none d-md-none d-lg-none d-xl-block">
+                    <div class="m24_signin_wrapper">
+						{% if request.user.is_authenticated %}
+						<a href="#" ><img src="/static/bl/images/pf.png" alt="img">
+                            <div class="login_top_wrapper">
+                                <p>MyAccount</p>
+
+                            </div>
+						</a>
+						{% else %}
+                        <a href="#" data-toggle="modal" data-target="#login_modal"><img src="/static/bl/images/pf.png" alt="img">
+                            <div class="login_top_wrapper">
+                                <p>login/register</p>
+
+                            </div>
+						</a>
+						{% endif %}
+					
+                    </div>
+                   
+
+                </div>
+
+				<div class="m24_navigation_wrapper">
+                    
+                    <div class="navi_searchbar_wrapper">
+                        <i class="flaticon-magnifying-glass"></i>
+
+                        <input type="text" id="justAnotherInputBox" placeholder="Search for Songs, Artists, Playlists and More.." />
+                    </div>
+					{% if request.user.is_authenticated %}
+					<div class="m24_navi_langauage_box d-none d-sm-none d-md-none d-lg-none d-xl-block">
+						<div class="lang_list_wrapper">
+							<a href="#" data-toggle="modal" data-target="#myModal">Upload <i class="fas fa-language"></i></a>
+						</div>
+					
+					</div>
+			
+					
+					{% endif %}
+                 
+                </div>
+            </div>
+        </div>
+
+    
+			
+			
+
+
+				
+{% for upload in uploads %}
+
+
+
+<div class="container-fluid">
+    
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card m-b-30">
+                <div class="card-body">
+<form class="" action="{% url 'bl:editsongUpload' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+                  
+
+                
+                      
+                        <div class="form-inline">
+
+                            
+                       
+                
+                                <div id="{{upload.single_id}}" class="form-group col-lg-4">
+                                    <div class="card-body pro-img mx-auto text-center">
+                                        <img  src="{{upload.cover}}" alt="" class="mx-auto d-block">
+                                        <button onclick="editCover('{{upload.single_id}}')" class="btn btn-outline-info mb-3">Add Cover</button>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="form-group col-lg-4">
+                                    <div id="xx{{upload.single_id}}" class="card-body pro-img mx-auto text-center">
+                                    </div>
+                                </div> -->
+                             
+                                  
+                                <div id="xx{{upload.single_id}}"  style="display: none;" class="form-group col-lg-4">
+                                    <button onclick="cancelEditCover('{{upload.single_id}}')" class="btn btn-danger waves-effect m-l-5">
+                                        reset
+                                    </button>
+                                    <input name="cover" type="file" id="input-file-now-custom-1" class="dropify" data-default-file="" />
+                                </div>
+                                    
+                                
+
+                                <input type="hidden"  name="single_id"  value="{{upload.single_id}}"/>
+
+
+
+                                <div class="form-group col-lg-3">
+                                    <label>Artist</label>
+                                    <input type="text" class="form-control" name="artist_name" required value="{{upload.artist_name}}" placeholder="Type something"/>
+                                
+                                </div>
+
+                                <div class="form-group col-lg-3">
+                                    <label>Song Ttile</label>
+                                    <input type="text" class="form-control" name="title" value="{{upload.title}}" required placeholder="Type something"/>
+                                </div>
+
+                        </div>
+                        
+
+                        <!-- <div class="form-group">
+                            <label>Featuring</label>
+                            <select class="select2 mb-3 select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Choose">
+                                <optgroup label="Alaskan/Hawaiian Time Zone">
+                                    <option value="AK">Alaska</option>
+                                    <option value="HI">Hawaii</option>
+                                </optgroup>
+                                <optgroup label="Pacific Time Zone">
+                                    <option value="CA">California</option>
+                                    <option value="NV">Nevada</option>
+                                    <option value="OR">Oregon</option>
+                                    <option value="WA">Washington</option>
+                                </optgroup>
+                                <optgroup label="Mountain Time Zone">
+                                    <option value="AZ">Arizona</option>
+                                    <option value="CO">Colorado</option>
+                                    <option value="ID">Idaho</option>
+                                    <option value="MT">Montana</option>
+                                    <option value="NE">Nebraska</option>
+                                    <option value="NM">New Mexico</option>
+                                    <option value="ND">North Dakota</option>
+                                    <option value="UT">Utah</option>
+                                    <option value="WY">Wyoming</option>
+                                </optgroup>
+                                <optgroup label="Central Time Zone">
+                                    <option value="AL">Alabama</option>
+                                    <option value="AR">Arkansas</option>
+                                    <option value="IL">Illinois</option>
+                                    <option value="IA">Iowa</option>
+                                    <option value="KS">Kansas</option>
+                                    <option value="KY">Kentucky</option>
+                                    <option value="LA">Louisiana</option>
+                                    <option value="MN">Minnesota</option>
+                                    <option value="MS">Mississippi</option>
+                                    <option value="MO">Missouri</option>
+                                    <option value="OK">Oklahoma</option>
+                                    <option value="SD">South Dakota</option>
+                                    <option value="TX">Texas</option>
+                                    <option value="TN">Tennessee</option>
+                                    <option value="WI">Wisconsin</option>
+                                </optgroup>
+                                <optgroup label="Eastern Time Zone">
+                                    <option value="CT">Connecticut</option>
+                                    <option value="DE">Delaware</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="GA">Georgia</option>
+                                    <option value="IN">Indiana</option>
+                                    <option value="ME">Maine</option>
+                                    <option value="MD">Maryland</option>
+                                    <option value="MA">Massachusetts</option>
+                                    <option value="MI">Michigan</option>
+                                    <option value="NH">New Hampshire</option>
+                                    <option value="NJ">New Jersey</option>
+                                    <option value="NY">New York</option>
+                                    <option value="NC">North Carolina</option>
+                                    <option value="OH">Ohio</option>
+                                    <option value="PA">Pennsylvania</option>
+                                    <option value="RI">Rhode Island</option>
+                                    <option value="SC">South Carolina</option>
+                                    <option value="VT">Vermont</option>
+                                    <option value="VA">Virginia</option>
+                                    <option value="WV">West Virginia</option>
+                                </optgroup>
+                            </select>      
+                        </div> -->
+
+                        <!-- <div class="form-group">
+                            <label>Description</label>
+                            <div>
+                                <textarea  class="form-control" rows="5"></textarea>
+                            </div>
+                        </div> -->
+                        <div class="form-group mb-0">
+                            <div>
+                                <button type="submit" class="btn btn-info waves-effect waves-light">
+                                    Submit
+                                </button>
+                                <button type="reset" class="btn btn-danger waves-effect m-l-5">
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                                  
+                </div>
+            </div>
+            </div>
+            </div>
+            </div> <!-- end col -->
+                   
+{% endfor  %}
+
+
+
+
+			
+	
+	<!-- stations wrapper start -->
+    </div>
+
+  
+   
+	<!--custom js files-->
+	<script src="/static/bl/libs/dropzone/dist/min/dropzone.min.js"></script>
+    <script src="/static/bl/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/bl/js/bootstrap.min.js"></script>
+    <script src="/static/bl/js/modernizr.js"></script>
+    <script src="/static/bl/js/plugin.js"></script>
+    <script src="/static/bl/js/jquery.nice-select.min.js"></script>
+    <script src="/static/bl/js/jquery.inview.min.js"></script>
+    <script src="/static/bl/js/jquery.magnific-popup.js"></script>
+    <script src="/static/bl/js/swiper.min.js"></script>
+    <script src="/static/bl/js/comboTreePlugin.js"></script>
+    <script src="/static/bl/js/mp3/jquery.jplayer.min.js"></script>
+    <script src="/static/bl/js/mp3/jplayer.playlist.js"></script>
+    <script src="/static/bl/js/owl.carousel.js"></script>
+    <script src="/static/bl/js/mp3/player.js"></script>
+    <script src="/static/bl/js/custom.js"></script>
+	<!-- custom js-->
+	
+
+
+
+
+
+
+
+
+	<script>
+        // Dropzone.autoDiscover = false;
+    
+        Dropzone.options.myAwesomeDropzone = {
+            acceptedFiles: ".mp3,.m4a,.wav,.flac,.alac,.aiff",
+            maxFiles: 2,
+            // addRemoveLinks: true,
+            init:  function () {
+                this.on("complete", function (file) {
+                    // this.removeFile(file); 
+                    //   alert("Complete."); 
+                    // console.log(file);
+                });
+    
+    
+                this.on("addedfile", function (file) {
+                  
+                    var formData = new FormData();
+                 
+                    formData.append('file', file);
+                  
+                    var frm = $('#my-awesome-dropzone');
+    
+                    var urlx = "{% url 'bl:gettags' %}";
+                    var urly = urlx.replace('123', file.name);
+                    var kkk=this;
+                    $.ajax({
+                        type: frm.attr('method'),
+                        url: urlx,
+                        data: formData,
+                        async: true,
+                        processData: false,
+                        contentType: false,
+                        success: function (data) {
+                            
+                            console.log("pass");
+                            console.log(data);
+    						var scratch = '<form id="songFormer" method="post" enctype="multipart/form-data">{% csrf_token %}  <div class="p-4 d-sm-flex no-shrink b-b"><div class="col-4 d-flex"><div class="avatar-upload"> <div class="avatar-edit"> <input name="imageUpload" id="fileHolder" type="text" ><input type="file"  id="imageUpload" accept=".png, .jpg, .jpeg"/> <label for="imageUpload"></label> </div><div class="avatar-preview"> <div id="imagePreview" style="background-image: url(' + data.image + ');"> </div></div></div></div><div class="col-8 px-sm-4 my-3 my-sm-0 flex"> <div class="form-group row"> <div class="col-sm-12"><label>Title</label><input type="text" name="title" class="form-control" value="'+ data.title +'" placeholder="Name" required> <input type="text" name="songFile" value="'+ value +'">  </div></div><div class="form-group"><label>Description (Optional)</label><textarea class="form-control" rows="6" placeholder="hmm.."></textarea></div><a  onclick="addSong()" class="btn btn-primary">Submit</a> </div><div><a href="#" class="btn btn-icon btn-rounded"><i data-feather="mail"></i> </a><a href="#" class="btn btn-icon btn-rounded"><i data-feather="more-vertical"></i></a></div></div></div></form>';
+                           
+                             document.getElementById("former").innerHTML += scratch;
+    
+    
+                               
+    
+                              
+    
+    
+                        },
+                        error: function (data) {
+                            // $("#MESSAGE-DIV").html("Something went wrong!");
+                            console.log("fail");
+    
+                        }
+                    });
+                    
+                });
+    
+    
+                // this.on("removedfile", function (file) {
+                //     alert("removedfile ");
+                //     console.log(file);
+                // });
+    
+    
+    
+    
+            }
+        };
+    
+    
+    
+    
+        
+    
+    
+        function addSong(){
+            // var feat = document.getElementsByClassName('feat'+a);
+            // for (var i = 0; i < feat.length; i++) { 
+            //     if (feat[i].checked) {
+            //         console.log(feat[i].value);
+            //         document.getElementById('featured'+a).value = feat[i].value;
+                    
+            //     }else{
+            //     }
+            //     // feat[i].disabled = false;
+            // }
+            // var feat = document.querySelector('input[name="rsvp"]:checked').value;
+            
+            var frm = $('#songFormer');
+            var urlx = "{% url 'bl:addsong' %}";
+            // var urly = urlx.replace('123',a);
+            // frm.submit(function () {
+                console.log(frm.serialize());
+                $.ajax({
+                    type: frm.attr('method'),
+                    url: urlx,
+                    data: frm.serialize(),
+                    async:true,
+                    // processData: false,
+                        // contentType: false,
+                    success: function (data) {
+                
+                   // document.getElementById('cartCounter').setAttribute("data-badge", data.total_items);
+                   console.log("pass"); 
+                   frm.hide();
+                   
+                   console.log(data); 
+                    },
+                    error: function(data) {
+                        // $("#MESSAGE-DIV").html("Something went wrong!");
+                        console.log("fail"); 
+                        console.log(data); 
+                    
+                    }
+                });
+                return false;
+            // });
+        }
+    
+    </script>
+    
+    
+    <script>
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getCookie('csrftoken');
+    
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+    
+    
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                var imageData;
+              
+    
+                reader.onload = (e) => {
+                    $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                    $('#imagePreview').hide();
+                    $('#imagePreview').fadeIn(650);
+                    // $('#fileHolder').val(e.target.result+"");
+                    // console.log(e.target.result);
+                    
+                    imageData = e.target.result+"";
+                    $('#fileHolder').val(imageData);
+                // console.log(imageData);
+                }
+    
+    
+    
+                reader.readAsDataURL(input.files[0]);
+    
+    
+                
+                console.log(input.files[0]);
+               
+            }
+        }
+        // $("#imageUpload").change(function () {
+        //     readURL(this);
+        // });
+    
+    
+        $(document).on('change', '#imageUpload', function(){
+            readURL(this);
+        });
+    </script>
+
+
+
+<script src="/static/bl/plugins/dropify/js/dropify.min.js"></script>        
+
+
+<script>
+    $(document).ready(function(){
+        // Basic
+        $('.dropify').dropify();
+
+        // Translated
+        $('.dropify-fr').dropify({
+            messages: {
+                default: 'Glissez-déposez un fichier ici ou cliquez',
+                replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+                remove:  'Supprimer',
+                error:   'Désolé, le fichier trop volumineux'
+            }
+        });
+
+        // Used events
+        var drEvent = $('#input-file-events').dropify();
+
+        drEvent.on('dropify.beforeClear', function(event, element){
+            return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+        });
+
+        drEvent.on('dropify.afterClear', function(event, element){
+            alert('File deleted');
+        });
+
+        drEvent.on('dropify.errors', function(event, element){
+            console.log('Has Errors');
+        });
+
+        var drDestroy = $('#input-file-to-destroy').dropify();
+        drDestroy = drDestroy.data('dropify')
+        $('#toggleDropify').on('click', function(e){
+            e.preventDefault();
+            if (drDestroy.isDropified()) {
+                drDestroy.destroy();
+            } else {
+                drDestroy.init();
+            }
+        })
+    });
+</script>
+
+
+<script>
+    function editCover(params) {
+        // var htmlText = "<input type='file' id='input-file-now-custom-1' class='dropify'>";
+        document.getElementById(params).style.display = 'none';
+        document.getElementById('xx'+ params).style.display = '';
+        
+    }
+
+    function cancelEditCover(params) {
+        // var htmlText = "<input type='file' id='input-file-now-custom-1' class='dropify'>";
+        document.getElementById('xx'+ params).style.display = 'none';
+        document.getElementById(params).style.display = '';
+       
+        
+    }
+</script>
+</body>
+
+</html>

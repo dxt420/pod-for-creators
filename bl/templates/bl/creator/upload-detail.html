@@ -1,0 +1,669 @@
+{% extends "bl/creator/base.html" %} {% load mytags %} {% block head %}
+
+<style>
+  .avatar-upload {
+    position: relative;
+    max-width: 205px;
+    margin: 20px;
+  }
+
+  .avatar-edit {
+    position: absolute;
+    right: 12px;
+    z-index: 1;
+    top: 10px;
+  }
+
+  .avatar-edit > input {
+    display: none;
+  }
+
+  .avatar-edit > input + label {
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+    margin-bottom: 0;
+    // border-radius: 100%;
+    background: #ffffff;
+    border: 1px solid transparent;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    font-weight: normal;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .avatar-edit > input &:hover {
+    background: #f1f1f1;
+    border-color: #d6d6d6;
+  }
+
+  .avatar-edit > input &:after {
+    content: "\f040";
+    font-family: "FontAwesome";
+    color: #757575;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin: auto;
+  }
+
+  .avatar-preview {
+    width: 192px;
+    height: 192px;
+    position: relative;
+    // border-radius: 100%;
+    border: 6px solid #f8f8f8;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+  }
+
+  .avatar-preview > div {
+    width: 100%;
+    height: 100%;
+    // border-radius: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+</style>
+
+{% endblock head %} {% block content %}
+
+<section class="page-user-profile">
+  <div class="row">
+    <div class="col-12">
+      <!-- user profile heading section start -->
+      <div class="card">
+        <div class="card-content">
+          <div class="user-profile-images">
+            <!-- user timeline image -->
+            <img
+              src="/static/bl/app-assets/images/music.jpg"
+              class="img-fluid rounded-top user-timeline-image"
+              alt="user timeline image"
+            />
+            <!-- user profile image -->
+
+            {% if song.cover %}
+            <img
+              src="{{song.cover}}"
+              class="user-profile-image rounded"
+              alt="user profile image"
+              height="140"
+              width="140"
+            />
+
+            {% else %}
+
+            <img
+              src="/static/bl/app-assets/images/album.png"
+              class="user-profile-image rounded"
+              alt="user profile image"
+              height="140"
+              width="140"
+            />
+            {% endif %}
+          </div>
+          <div class="user-profile-text">
+            <h4 class="mb-0 text-bold-500 profile-text-color">
+              {{song.title}}
+            </h4>
+            <small class="mb-0 text-bold-700 profile-text-color"
+              >{{song.artist_name}}</small
+            ><br />
+            <small class="mb-0 text-bold-400 profile-text-color">Single</small>
+          </div>
+          <!-- user profile nav tabs start -->
+          <div class="card-body px-0">
+            <ul
+              class="nav user-profile-nav justify-content-center justify-content-md-start nav-tabs border-bottom-0 mb-0"
+              role="tablist"
+            >
+              <li class="nav-item pb-0">
+                <!-- AUDIO -->
+
+                <audio id="plyr-audio-player" class="audio-player" controls>
+                  <source src="{{song.track_file.file_url}}" type="audio/mp3" />
+                  {% comment %}
+                  <source
+                    src="https://cdn.plyr.io/static/demo/Kishi_Bashi_-_It_All_Began_With_a_Burst.ogg"
+                    type="audio/ogg"
+                  />
+                  {% endcomment %}
+                </audio>
+                <!-- AUDIO END -->
+              </li>
+            </ul>
+          </div>
+
+          <!-- user profile nav tabs ends -->
+        </div>
+      </div>
+
+      <!-- user profile heading section ends -->
+
+      <!-- user profile content section start -->
+      <div class="row">
+        <!-- user profile nav tabs content start -->
+        <div class="col-lg-9">
+          <div class="tab-content">
+            <div
+              class="tab-pane active"
+              id="feed"
+              aria-labelledby="feed-tab"
+              role="tabpanel"
+            >
+              <!-- user profile nav tabs feed start -->
+              <div class="row">
+                <!-- user profile nav tabs feed left section start -->
+                <div class="col-lg-4">
+                  <!-- user profile nav tabs feed left section info card start -->
+                  <div class="card">
+                    <div class="card-content">
+                      <div class="card-body">
+                        <h5 class="card-title mb-1">
+                          Stats
+                          <i
+                            class="cursor-pointer bx bx-dots-vertical-rounded float-right"
+                          ></i>
+                        </h5>
+                        <ul class="list-unstyled mb-0">
+                          <li class="d-flex align-items-center mb-25">
+                            <i class="bx bx-briefcase mr-50 cursor-pointer"></i>
+                            <span> 0 Plays </span>
+                          </li>
+                          <li class="d-flex align-items-center mb-25">
+                            <i class="bx bx-briefcase mr-50 cursor-pointer"></i>
+                            <span> 0 Favorites </span>
+                          </li>
+                          <li class="d-flex align-items-center mb-25">
+                            <i class="bx bx-receipt mr-50 cursor-pointer"></i>
+                            <span> 0 Playlists </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- user profile nav tabs feed left section today's events card start -->
+                  <div class="card">
+                    <div class="card-content">
+                      <div class="card-body">
+                        <h5 class="card-title mb-1">
+                          Info<i
+                            class="cursor-pointer bx bx-dots-vertical-rounded float-right"
+                          ></i>
+                        </h5>
+                        <div class="user-profile-event">
+                          <div class="pb-1 d-flex align-items-center">
+                            <small>Produced by</small>
+                            &nbsp;
+                            <i
+                              class="cursor-pointer bx bx-plus-circle text-primary mr-25"
+                            ></i>
+                          </div>
+                          <h6 class="text-bold-500 font-small-3">-</h6>
+                        </div>
+
+                        <hr />
+                        <div class="user-profile-event">
+                          <div class="pb-1 d-flex align-items-center">
+                            <small>Year</small>
+                          </div>
+                          <h6 class="text-bold-500 font-small-3">
+                            {{song.year}}
+                          </h6>
+                        </div>
+                        <hr />
+                        <div class="user-profile-event">
+                          <div class="pb-1 d-flex align-items-center">
+                            <small>More</small>
+                            &nbsp;
+                            <i
+                              class="cursor-pointer bx bx-plus-circle text-primary mr-25"
+                            ></i>
+                          </div>
+                          <div class="pb-1">
+                            <h6 class="text-bold-500 font-small-3">-</h6>
+                          </div>
+                        </div>
+                        <button class="btn btn-block btn-danger">
+                          Delete this track
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- user profile nav tabs feed left section today's events card ends -->
+                </div>
+                <!-- user profile nav tabs feed left section ends -->
+                <!-- user profile nav tabs feed middle section start -->
+                <div class="col-lg-8">
+                  <!-- user profile nav tabs feed middle section post card start -->
+
+                  <div class="card">
+                    <div class="card-content">
+                      <div class="card-body">
+                        <!-- timeline widget start -->
+
+                        <div class="text-center">
+                          <h6 class="timeline-title">
+                            No Activity on this track yet
+                          </h6>
+                        </div>
+
+                        {% comment %}
+                        <ul class="widget-timeline">
+                          <li
+                            class="timeline-items timeline-icon-success active"
+                          >
+                            <div class="timeline-time">Tue 8:17pm</div>
+                            <h6 class="timeline-title">Martina Ash</h6>
+                            <p class="timeline-text">
+                              on <a href="JavaScript:void(0);">Received Gift</a>
+                            </p>
+                            <div class="timeline-content">
+                              Welcome to vedio game and lame is very creative
+                            </div>
+                          </li>
+                          <li
+                            class="timeline-items timeline-icon-primary active"
+                          >
+                            <div class="timeline-time">5 days ago</div>
+                            <h6 class="timeline-title">
+                              Jonny Richie attached file
+                            </h6>
+                            <p class="timeline-text">
+                              on <a href="JavaScript:void(0);">Project name</a>
+                            </p>
+                            <div class="timeline-content">
+                              <img
+                                src="/static/bl/app-assets/images/icon/sketch.png"
+                                alt="document"
+                                height="36"
+                                width="27"
+                                class="mr-50"
+                              />Data Folder
+                            </div>
+                          </li>
+                          <li
+                            class="timeline-items timeline-icon-danger active"
+                          >
+                            <div class="timeline-time">7 hours ago</div>
+                            <h6 class="timeline-title">Mathew Slick docs</h6>
+                            <p class="timeline-text">
+                              on <a href="JavaScript:void(0);">Project name</a>
+                            </p>
+                            <div class="timeline-content">
+                              <img
+                                src="/static/bl/app-assets/images/icon/pdf.png"
+                                alt="document"
+                                height="36"
+                                width="27"
+                                class="mr-50"
+                              />Received Pdf
+                            </div>
+                          </li>
+                          <li class="timeline-items timeline-icon-info active">
+                            <div class="timeline-time">5 hour ago</div>
+                            <h6 class="timeline-title">
+                              Petey Cruiser send you a message
+                            </h6>
+                            <p class="timeline-text">
+                              on
+                              <a href="JavaScript:void(0);">Redited message</a>
+                            </p>
+                            <div class="timeline-content">
+                              Nor again is there anyone who loves or pursues or
+                              desires to obtain pain of itself, because it is
+                              pain, but because occasionally circumstances
+                            </div>
+                          </li>
+                          <li class="timeline-items timeline-icon-warning">
+                            <div class="timeline-time">2 min ago</div>
+                            <h6 class="timeline-title">Anna mull liked</h6>
+                            <p class="timeline-text">
+                              on <a href="JavaScript:void(0);">Liked</a>
+                            </p>
+                            <div class="timeline-content">The Amairates</div>
+                          </li>
+                        </ul>
+                        {% endcomment %}
+                        <!-- timeline widget ends -->
+                        {% comment %}
+                        <div class="text-center">
+                          <button class="btn btn-primary">
+                            View All Activity
+                          </button>
+                        </div>
+                        {% endcomment %}
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- user profile nav tabs feed middle section user-4 card ends -->
+                </div>
+                <!-- user profile nav tabs feed middle section ends -->
+              </div>
+              <!-- user profile nav tabs feed ends -->
+            </div>
+          </div>
+        </div>
+        <!-- user profile nav tabs content ends -->
+        <!-- user profile right side content start -->
+        <div class="col-lg-3">
+          <!-- user profile right side content related groups start -->
+          <div class="card">
+            <div class="card-content">
+              <div class="card-body">
+                <h5 class="card-title mb-1">
+                  Related Tracks
+                  <i
+                    class="cursor-pointer bx bx-plus-circle align-top float-right"
+                  ></i>
+                </h5>
+                {% comment %}
+                <div class="media d-flex align-items-center mb-1">
+                  <a href="JavaScript:void(0);">
+                    <img
+                      src="/static/bl/app-assets/images/banner/banner-30.jpg"
+                      class="rounded"
+                      alt="group image"
+                      height="64"
+                      width="64"
+                    />
+                  </a>
+                  <div class="media-body ml-1">
+                    <h6 class="media-heading mb-0">
+                      <small>Play Guitar</small>
+                    </h6>
+                    <small class="text-muted">2.8k members (7 joined)</small>
+                  </div>
+                  <i
+                    class="cursor-pointer bx bx-plus-circle text-primary d-flex align-items-center"
+                  ></i>
+                </div>
+                <div class="media d-flex align-items-center mb-1">
+                  <a href="JavaScript:void(0);">
+                    <img
+                      src="/static/bl/app-assets/images/banner/banner-31.jpg"
+                      class="rounded"
+                      alt="group image"
+                      height="64"
+                      width="64"
+                    />
+                  </a>
+                  <div class="media-body ml-1">
+                    <h6 class="media-heading mb-0">
+                      <small>Generic memes</small>
+                    </h6>
+                    <small class="text-muted">9k members (7 joined)</small>
+                  </div>
+                  <i
+                    class="cursor-pointer bx bx-plus-circle text-primary d-flex align-items-center"
+                  ></i>
+                </div>
+                <div class="media d-flex align-items-center">
+                  <a href="JavaScript:void(0);">
+                    <img
+                      src="/static/bl/app-assets/images/banner/banner-32.jpg"
+                      class="rounded"
+                      alt="group image"
+                      height="64"
+                      width="64"
+                    />
+                  </a>
+                  <div class="media-body ml-1">
+                    <h6 class="media-heading mb-0">
+                      <small>Cricket fan club</small>
+                    </h6>
+                    <small class="text-muted">7.6k members</small>
+                  </div>
+                  <i
+                    class="cursor-pointer bx bx-lock text-muted d-flex align-items-center"
+                  ></i>
+                </div>
+                {% endcomment %}
+              </div>
+            </div>
+          </div>
+          <!-- user profile right side content related groups ends -->
+        </div>
+        <!-- user profile right side content ends -->
+      </div>
+      <!-- user profile content section start -->
+    </div>
+  </div>
+</section>
+<!-- page user profile ends -->
+
+<div class="widget-chat-demo">
+  <!-- widget chat demo footer button start -->
+  <button
+    type="button"
+    data-toggle="modal"
+    data-target="#editTrack"
+    class="btn btn-primary chat-demo-button glow px-1"
+  >
+    <i
+      class="livicon-evo"
+      data-options="name: pen.svg; style: lines; size: 24px; strokeColor: #fff; autoPlay: true; repeat: loop;"
+    ></i
+    >Edit Track
+  </button>
+  <!-- widget chat demo footer button ends -->
+
+  <!--Dark theme Modal -->
+  <div
+    class="modal fade text-left"
+    id="editTrack"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel150"
+    aria-hidden="true"
+  >
+    <div
+      class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+      role="document"
+    >
+      <div class="modal-content">
+        <div class="modal-header bg-dark white">
+          <span class="modal-title" id="myModalLabel150">Edit Track </span>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <i class="bx bx-x"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="media">
+            <div class="avatar-upload">
+              <div class="avatar-edit">
+                <input
+                  type="file"
+                  id="imageUpload"
+                  accept=".png, .jpg, .jpeg"
+                />
+                <label for="imageUpload"></label>
+
+                {% comment %}
+                <input
+                  type="hidden"
+                  id="imageHolder"
+                  value="`"
+                  +
+                  imageUri
+                  +
+                  `
+                  name="imageUpload"
+                />
+                {% endcomment %}
+              </div>
+              <div class="avatar-preview">
+                <div
+                  id="imagePreview"
+                  style="background-image: url('{{song.cover}}');"
+                ></div>
+              </div>
+            </div>
+
+            <div class="media-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <label>Title</label>
+                  <input
+                    type="text"
+                    name="title"
+                    class="form-control"
+                    value="{{song.title}}"
+                    placeholder="What is the title of this track"
+                    required
+                  />
+                </div>
+                <div class="col-lg-6">
+                  <label>Artist</label>
+                  <input
+                    type="text"
+                    name="artist"
+                    class="form-control"
+                    value="{{song.artist_name}}"
+                    placeholder="Type in the artist name"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-6">
+                  <label>Year</label>
+                  <input
+                    type="text"
+                    name="year"
+                    class="form-control"
+                    value="{{song.year}}"
+                  />
+                </div>
+
+                <div class="col-lg-6">
+                  <label>Duration</label>
+                  <input
+                    type="text"
+                    name="duration"
+                    class="form-control"
+                    value="{{song.duration}}"
+                    required
+                    readonly="readonly"
+                  />
+                </div>
+              </div>
+
+              <label>Description (Optional)</label>
+              <textarea
+                name="description"
+                class="form-control"
+                rows="6"
+                placeholder="hmm.."
+              ></textarea>
+              {% comment %}
+              <h4 class="media-heading">Cookie candy</h4>
+              Cookie candy dragée marzipan gingerbread pie pudding. Brownie
+              fruitcake wafer bonbon gummi bears apple pie. Brownie lemon drops
+              chocolate cake donut croissant cotton candy. {% endcomment %}
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-light-secondary"
+            data-dismiss="modal"
+          >
+            <i class="bx bx-x d-block d-sm-none"></i>
+            <span class="d-none d-sm-block">Cancel</span>
+          </button>
+          <button type="button" class="btn btn-dark ml-1" data-dismiss="modal">
+            <i class="bx bx-check d-block d-sm-none"></i>
+            <span class="d-none d-sm-block">Save Track Details</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock content %} {% block scripts %}
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.3/jsmediatags.min.js"
+    integrity="sha512-gQ6HBTG0fuB5lRb4v9YJtFPyKUBGlaK1o6cmzqt6umBCyi4S1XdCg/hVptb1XLs1MTkUtCH6rZSI0a+eJJLkXQ=="
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== "") {
+        var cookies = document.cookie.split(";");
+        for (var i = 0; i < cookies.length; i++) {
+          var cookie = jQuery.trim(cookies[i]);
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === name + "=") {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+    var csrftoken = getCookie("csrftoken");
+
+    function csrfSafeMethod(method) {
+      // these HTTP methods do not require CSRF protection
+      return /^(GET|HEAD|OPTIONS|TRACE)$/.test(method);
+    }
+    $.ajaxSetup({
+      beforeSend: function (xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+          xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+      },
+    });
+
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        var imageData;
+
+        reader.onload = (e) => {
+          $("#imagePreview").css(
+            "background-image",
+            "url(" + e.target.result + ")"
+          );
+          $("#imagePreview").hide();
+          $("#imagePreview").fadeIn(650);
+          // $('#fileHolder').val(e.target.result+"");
+          // console.log(e.target.result);
+
+          imageData = e.target.result + "";
+          $("#imageHolder").val(imageData);
+          // console.log(imageData);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+
+        console.log(input.files[0]);
+
+        ////
+      }
+    }
+    // $("#imageUpload").change(function () {
+    //     readURL(this);
+    // });
+
+    $(document).on("change", "#imageUpload", function () {
+      readURL(this);
+    });
+  </script>
+
+  {% endblock scripts %}
+</div>

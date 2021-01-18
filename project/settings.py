@@ -15,6 +15,7 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+SITE_ID = 1
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -25,7 +26,7 @@ SECRET_KEY = 'n(_zb+=j2or8tjm16-@^-nmn1kyn3rl2fbglnw)c5w%5pl=hzh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['pod.pythonanywhere.com','localhost']
+ALLOWED_HOSTS = ['pod.pythonanywhere.com','localhost','*']
 
 
 # Application definition
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+      'django.contrib.sites',
     'bl',
     'rest_framework',
     'rest_framework_docs',
@@ -74,7 +76,7 @@ MIDDLEWARE = [
 
 AUTHENTICATION_BACKENDS = (
    
- 
+  'social_core.backends.facebook.FacebookOAuth2',
     'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
  'social_core.backends.google.GoogleOpenId',  # for Google authentication
  'social_core.backends.google.GoogleOAuth2',
@@ -100,7 +102,7 @@ TEMPLATES = [
                 'social_django.context_processors.login_redirect', # <--
             ],
             'libraries':{
-            'my_tags': 'bl.template_tags.my_tags',
+            'mytags': 'bl.mytags',
             }
         },
     },
@@ -169,7 +171,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
-LOGIN_REDIRECT_URL = 'bl:loginredirect'
+LOGIN_REDIRECT_URL = 'bl:index'
 
 LOGIN_URL = 'login'
 
@@ -178,10 +180,46 @@ LOGOUT_URL = 'logout'
 
 
 
+# LOGIN_REDIRECT_URL = 'dashboard'
+
+
+
+# App Common Information
+APP_EMAIL_FROM = 'omonaderrick25@gmail.com'
+APP_URL_TOP_LOGO = BASE_DIR + 'static/assets/images/PinoyLearnPython-PLP.png'
+APP_USER_AUTH_RE_ACCESS_LOGIN_PAGE = 'helloworld'
+
+# Custom Password settings
+MIN_PASS_LENGTH = 8
+PASSWORD_RESET_TIMEOUT_DAYS = 1
+
+
+
+
+
+# Google reCAPTCHA v3 api keys
+GRECAP_SITE_KEY = '6LdHrN8UAAAAABi9eRSOwp5dCgh9WE8tWvUnFAUn'
+
+# path_sk = BASE_DIR + '/static/bl/assets/GRECAP_SECRET_KEY.txt'
+# read_sk = open(path_sk, "r")
+# GRECAP_SECRET_KEY = read_sk.read()
+# read_sk.close()
+
+
+GRECAP_SECRET_KEY = '6LdHrN8UAAAAAPuS1gCwl2BLnQHSXwwg8bDhKZBg'
+
+
+GRECAP_VERIFY_URL = 'https://www.google.com/recaptcha/api/siteverify'
+
+
+
+
 
 MEDIA_URL = 'media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+# MEDIA_ROOT = 'media/'
 
 
 
@@ -198,3 +236,31 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = [
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "866068650147-eh40o0tk666cfujmiam7s8129cgjiivv.apps.googleusercontent.com" #Paste CLient Key
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "n_xcVC9wzWWf24fwriv0QghY" #Paste Secret Key
+
+
+SOCIAL_AUTH_FACEBOOK_KEY = '1493502657467609'        # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = 'df8b20339c31ef06ee9c95497af5e510'  # App Secret
+
+
+# SMTP Server Settings
+# path_email = '/root/dev/config/email_pass.txt'
+# # fem = open(path_email, "r")
+# EMAIL_HOST_PASSWORD = fem.read()
+# # fem.close()
+
+# EMAIL_HOST = 'smtp.dreamhost.com'
+# EMAIL_PORT = 465
+# EMAIL_HOST_USER = 'your_email@domain.com'
+# DEFAULT_FROM_EMAIL = 'support@pinoylearnpython.com'
+# EMAIL_USE_SSL = True
+
+# # SMTP for Production
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'omonaderrick25@gmail.com'
+EMAIL_HOST_PASSWORD = 'gmail-password'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

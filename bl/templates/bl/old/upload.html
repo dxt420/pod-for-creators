@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<!--[if !IE]><!-->
+<html lang="zxx">
+<!--[endif]-->
+
+<head>
+    <meta charset="utf-8" />
+    <title>Tunein Responsive HTML Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="description" content="Tunein,music,song" />
+    <meta name="keywords" content="Tunein,music,song" />
+    <meta name="author" content="" />
+    <meta name="MobileOptimized" content="320" />
+    <!--Template style -->
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/animate.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/fonts.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/flaticon.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/nice-select.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/swiper.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/magnific-popup.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/responsive.css" />
+    <!--favicon-->
+	<link rel="shortcut icon" type="image/png" href="/static/bl/images/favicon.png" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.3/jsmediatags.min.js" integrity="sha512-gQ6HBTG0fuB5lRb4v9YJtFPyKUBGlaK1o6cmzqt6umBCyi4S1XdCg/hVptb1XLs1MTkUtCH6rZSI0a+eJJLkXQ==" crossorigin="anonymous"></script>
+	
+    <link rel='stylesheet' id='compiled.css-css'  href='https://mdbootstrap.com/wp-content/themes/mdbootstrap4/css/compiled-4.19.1.min.css?ver=4.19.1' type='text/css' media='all' />
+
+
+
+	<style>
+		@font-face { font-family: 'myfont';
+             src: url('/static/bl/fonts/josefin-sans/JosefinSans-Regular.ttf') format('truetype'); }
+		*{
+			/* font-family: josefin sans,sans-serif !important; */
+
+			font-family: 'myfont';
+		}
+	</style>
+</head>
+
+<body>
+    <!-- preloader Start -->
+    <div id="preloader">
+        <div id="status">
+            <img src="/static/bl/images/loader.gif" id="preloader_image" alt="loader">
+        </div>
+    </div>
+    <div class="cursor"></div>
+    <!-- top navi wrapper Start -->
+    <div class="m24_main_wrapper">
+   
+        <!-- top navi wrapper end -->
+        <div class="m24_navi_main_wrapper index2_main_header index3_main_header m24_cover">
+            <div class="container-fluid">
+                <div class="m24_logo_wrapper">
+                    <div class="m24_logo_div">
+                        <a href="index.html">
+                            <img src="/static/bl/images/logo3.png" alt="logo">
+                        </a>
+                    </div>
+                    
+                </div>
+
+                <div class="m24_header_right_Wrapper d-none d-sm-none d-md-none d-lg-none d-xl-block">
+                    <div class="m24_signin_wrapper">
+						{% if request.user.is_authenticated %}
+						<a href="#" ><img src="/static/bl/images/pf.png" alt="img">
+                            <div class="login_top_wrapper">
+                                <p>MyAccount</p>
+
+                            </div>
+						</a>
+						{% else %}
+                        <a href="#" data-toggle="modal" data-target="#login_modal"><img src="/static/bl/images/pf.png" alt="img">
+                            <div class="login_top_wrapper">
+                                <p>login/register</p>
+
+                            </div>
+						</a>
+						{% endif %}
+					
+                    </div>
+                   
+
+                </div>
+
+				<div class="m24_navigation_wrapper">
+                    
+                    <div class="navi_searchbar_wrapper">
+                        <i class="flaticon-magnifying-glass"></i>
+
+                        <input type="text" id="justAnotherInputBox" placeholder="Search for Songs, Artists, Playlists and More.." />
+                    </div>
+					{% if request.user.is_authenticated %}
+					<div class="m24_navi_langauage_box d-none d-sm-none d-md-none d-lg-none d-xl-block">
+						<div class="lang_list_wrapper">
+							<a href="#" data-toggle="modal" data-target="#myModal">Upload <i class="fas fa-language"></i></a>
+						</div>
+					
+					</div>
+			
+					
+					{% endif %}
+                 
+                </div>
+            </div>
+        </div>
+
+       <!-- stations wrapper start -->
+	   <div class="treanding_songs_wrapper stations_wrapper m24_cover">
+		<div class="container">
+			<div class="row">
+			
+				<div class="col-xl-8 col-lg-8 col-md-8 col-sm-12">
+					<div class="treanding_slider_main_box top_artist_wrapper_new m24_cover">
+						<form action="#" method="POST" id="my-awesome-dropzone"
+						class="dropzone white b-a b-3x b-dashed b-primary p-a rounded p-5 text-center"
+						data-plugin="dropzone" data-option="#">
+		
+						{% csrf_token %}
+						<div class="dz-message">
+							<h4 class="my-4">Drag and drop your tracks here</h4><span
+								class="text-muted d-block mb-4">(Recommended files are
+								<strong>.mp3, .m4a, .wav .flac, .alac or .aiff</strong> for best
+								audio experiences uploaded.)</span>
+						</div>
+					</form>
+					</div>
+				</div>
+
+
+				
+			        					
+			</div>
+		</div>
+	</div>
+	<!-- stations wrapper start -->
+
+
+<div id="former" class="scroll-y mx-3 mb-3 card">
+
+				</div>
+    
+    </div>
+
+  
+ 
+	<!--custom js files-->
+	<script src="/static/bl/libs/dropzone/dist/min/dropzone.min.js"></script>
+    <script src="/static/bl/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/bl/js/bootstrap.min.js"></script>
+    <script src="/static/bl/js/modernizr.js"></script>
+    <script src="/static/bl/js/plugin.js"></script>
+    <script src="/static/bl/js/jquery.nice-select.min.js"></script>
+    <script src="/static/bl/js/jquery.inview.min.js"></script>
+    <script src="/static/bl/js/jquery.magnific-popup.js"></script>
+    <script src="/static/bl/js/swiper.min.js"></script>
+    <script src="/static/bl/js/comboTreePlugin.js"></script>
+    <script src="/static/bl/js/mp3/jquery.jplayer.min.js"></script>
+    <script src="/static/bl/js/mp3/jplayer.playlist.js"></script>
+    <script src="/static/bl/js/owl.carousel.js"></script>
+    <script src="/static/bl/js/mp3/player.js"></script>
+    <script src="/static/bl/js/custom.js"></script>
+	<!-- custom js-->
+	
+
+
+
+
+
+
+
+
+	<script>
+
+
+var jsmediatags = window.jsmediatags
+  
+    
+        Dropzone.options.myAwesomeDropzone = {x
+            acceptedFiles: ".mp3,.m4a,.wav,.flac,.alac,.aiff",
+            maxFiles: 2,
+            // addRemoveLinks: true,
+            init:  function () {
+                this.on("complete", function (file) {
+                    // this.removeFile(file); 
+                    //   alert("Complete."); 
+                    // console.log(file);
+                    $('.treanding_songs_wrapper').remove();
+                });
+    
+    
+                 this.on("addedfile", async function (file) {
+                  
+                  let blob, audioTags
+//
+//
+   
+                    var audioSrc = URL.createObjectURL(file)
+                    try {
+                        
+                        const resp = await fetch(audioSrc)
+                        if (resp.status === 200) {
+                        blob = await resp.blob()
+                        console.log(blob)
+                        // parse blob instead of file
+                        jsmediatags.read(blob, {
+                            onSuccess: (tag) => {
+                                console.log(tag)
+                            audioTags = tag
+                           // json.textContent = JSON.stringify(tag)
+
+                           if(audioTags.tags.picture){
+                               console.log(audioTags.tags.picture);
+                               var picture = audioTags.tags.picture; // create reference to track art
+                                var base64String = "";
+                                for (var i = 0; i < picture.data.length; i++) {
+                                    base64String += String.fromCharCode(picture.data[i]);
+                                }
+                                var imageUri = "data:" + picture.format + ";base64," + window.btoa(base64String);
+                                console.log(imageUri);
+
+
+                           }
+
+                           	 var scratch = 
+                                
+                                `
+                 <div class="artist_wrapper m24_cover">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="artist_wrapper_content m24_cover">
+                   
+                      
+                            <img style="width: 200px" src="`+ imageUri +`" alt="img"> 
+
+                            <div class="file-upload-wrapper">
+  <input type="file" id="input-file-now-custom-1" class="file-upload" data-default-file="`+ imageUri +`" />
+</div>
+
+                            <div class="m24_treanding_box_overlay">
+                                <div class="m24_tranding_box_overlay"></div>
+
+                                <div class="tranding_play_icon various_concert_icon">
+                                    <a href="#">
+                                        <i class="flaticon-play-button"></i>
+                                    </a>
+                                </div>
+                            </div>
+                           
+                
+                 
+                    <div class="artist_wrapper_text">
+                        <div class="artist_wrapper_left">
+                            <label>Title</label>
+                            <input type="text" name="title" class="form-control" value="` +  audioTags.tags.title + `" placeholder="Name" required> 
+                                
+                            <label>Description (Optional)</label>
+                        <textarea class="form-control" rows="6" placeholder="hmm.."></textarea>
+                            <div class="artist_btn m24_cover">
+                                <div class="lang_apply_btn">
+
+                                    <a href="#"><i class="flaticon-play-button"></i> Upload</a>
+
+                                </div>
+                                <div class="cancel_wrapper">
+                                    <a href="#"><i class="flaticon-radio"></i>  X</a>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                               `;
+                           
+                             document.getElementById("former").innerHTML += scratch;
+                            },
+                            onError: (e) => {
+                            console.log(e)
+                            }
+                        })
+                        
+                        }
+                    } catch(e) {
+                        console.log(e)
+                    }
+                    
+                            
+                           // console.log("pass");
+                         //   console.log(audioTags);
+                            
+    						// var scratch = '<form id="songFormer" method="post" enctype="multipart/form-data">{% csrf_token %}  <div class="p-4 d-sm-flex no-shrink b-b"><div class="col-4 d-flex"><div class="avatar-upload"> <div class="avatar-edit"> <input name="imageUpload" id="fileHolder" type="text" ><input type="file"  id="imageUpload" accept=".png, .jpg, .jpeg"/> <label for="imageUpload"></label> </div><div class="avatar-preview"> </div></div></div><div class="col-8 px-sm-4 my-3 my-sm-0 flex"> <div class="form-group row"> <div class="col-sm-12"><label>Title</label><input type="text" name="title" class="form-control" value="'+ audioTags.tags.title +'" placeholder="Name" required> <audio src="'+ audioSrc +'" controls></audio>  </div></div><div class="form-group"><label>Description (Optional)</label><textarea class="form-control" rows="6" placeholder="hmm.."></textarea></div><a  onclick="addSong()" class="btn btn-primary">Submit</a> </div><div><a href="#" class="btn btn-icon btn-rounded"><i data-feather="mail"></i> </a><a href="#" class="btn btn-icon btn-rounded"><i data-feather="more-vertical"></i></a></div></div></div></form>';
+                           
+                             // document.getElementById("former").innerHTML += scratch;
+	
+						//	window.location.href = 'editUploads'
+    
+                });
+    
+    
+                // this.on("removedfile", function (file) {
+                //     alert("removedfile ");
+                //     console.log(file);
+                // });
+    
+    
+    
+    
+            }
+        };
+    
+    
+    
+    
+        
+    
+    
+        function addSong(){
+            // var feat = document.getElementsByClassName('feat'+a);
+            // for (var i = 0; i < feat.length; i++) { 
+            //     if (feat[i].checked) {
+            //         console.log(feat[i].value);
+            //         document.getElementById('featured'+a).value = feat[i].value;
+                    
+            //     }else{
+            //     }
+            //     // feat[i].disabled = false;
+            // }
+            // var feat = document.querySelector('input[name="rsvp"]:checked').value;
+            
+            var frm = $('#songFormer');
+            var urlx = "{% url 'bl:addsong' %}";
+            // var urly = urlx.replace('123',a);
+            // frm.submit(function () {
+                console.log(frm.serialize());
+                $.ajax({
+                    type: frm.attr('method'),
+                    url: urlx,
+                    data: frm.serialize(),
+                    async:true,
+                    // processData: false,
+                        // contentType: false,
+                    success: function (data) {
+                
+                   // document.getElementById('cartCounter').setAttribute("data-badge", data.total_items);
+                   console.log("pass"); 
+                   frm.hide();
+                   
+                   console.log(data); 
+                    },
+                    error: function(data) {
+                        // $("#MESSAGE-DIV").html("Something went wrong!");
+                        console.log("fail"); 
+                        console.log(data); 
+                    
+                    }
+                });
+                return false;
+            // });
+        }
+    
+    </script>
+    
+    
+    <script>
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getCookie('csrftoken');
+    
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+    
+    
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                var imageData;
+              
+    
+                reader.onload = (e) => {
+                    $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                    $('#imagePreview').hide();
+                    $('#imagePreview').fadeIn(650);
+                    // $('#fileHolder').val(e.target.result+"");
+                    // console.log(e.target.result);
+                    
+                    imageData = e.target.result+"";
+                    $('#fileHolder').val(imageData);
+                // console.log(imageData);
+                }
+    
+    
+    
+                reader.readAsDataURL(input.files[0]);
+    
+    
+                
+                console.log(input.files[0]);
+               
+            }
+        }
+        // $("#imageUpload").change(function () {
+        //     readURL(this);
+        // });
+    
+    
+        $(document).on('change', '#imageUpload', function(){
+            readURL(this);
+        });
+    </script>
+
+</body>
+
+</html>

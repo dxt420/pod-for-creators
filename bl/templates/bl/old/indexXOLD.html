@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- Meta Data -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Pod</title>
+
+	<!-- Fav Icon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/static/bl/assets/img/fav-icons/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/static/bl/assets/img/fav-icons/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/static/bl/assets/img/fav-icons/favicon-16x16.png">
+	<meta name="theme-color" content="#e43a90">
+
+	<!-- Dependency Styles -->
+	<link rel="stylesheet" href="/static/bl/dependencies/bootstrap/css/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="/static/bl/dependencies/intro/css/stylesheet.css" type="text/css">
+	<link rel="stylesheet" href="/static/bl/dependencies/swiper/swiper.min.css" type="text/css">
+	<!-- <link rel="stylesheet" href="/static/bl/dependencies/font-awesome/css/font-awesome.min.css" type="text/css"> -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+		type="text/css">
+
+	<link rel="stylesheet" href="/static/bl/dependencies/wow/css/animate.css" type="text/css">
+	<link rel="stylesheet" href="/static/bl/dependencies/magnific-popup/magnific-popup.css" type="text/css">
+	<link rel="stylesheet" href="/static/bl/dependencies/jquery-ui/css/jquery-ui.css" type="text/css">
+	<link rel="stylesheet" href="/static/bl/dependencies/slick-carousel/css/slick.css" type="text/css">
+	<link rel="stylesheet" href="/static/bl/dependencies/colornip/css/colornip.min.css" type="text/css">
+	<link rel="stylesheet" href="/static/bl/dependencies/css-loader/css/css-loader.css" type="text/css">
+
+	<!-- Site Stylesheet -->
+	<link rel="stylesheet" href="/static/bl/assets/css/woocommerce.css" type="text/css">
+	<link rel="stylesheet" href="/static/bl/assets/css/app.css" type="text/css">
+
+
+
+
+
+</head>
+
+<body id="home-version-1" class="home-version-1" data-style="default">
+
+	<div class="loader loader-bar-ping-pong is-active"></div>
+	<div id="site">
+
+
+
+		<!--=========================-->
+		<!--=        Navbar         =-->
+		<!--=========================-->
+		<header class="header header-magic-line">
+			<div class="header-inner">
+				<div class="tim-container clearfix">
+					<div class="header-magic-line-inner clearfix">
+						<div id="site-logo" class="float-left">
+							<a href="index.html" class="logo-main">
+								<img src="/static/bl/assets/img/logo_5.png" alt="logo">
+							</a>
+
+							<a href="index.html" class="logo-stickky">
+								<img src="/static/bl/assets/img/logo_5.png" alt="logo">
+							</a>
+						</div>
+
+						<ul class="user-login">
+						
+							<li><a href="javascript:void(0)" class="search-trigger"><i class="fa fa-search"
+										aria-hidden="true"></i></a>
+								<div class="search-input-wrapper">
+									<input class="search-input" placeholder="Search" type="text">
+								</div>
+							</li>
+						</ul>
+						<div class="nav">
+
+							{% if request.user.is_authenticated %}
+
+
+							<ul class="group" id="header-menu-magic-line">
+								<li class="menu-item ">
+									<a href={% url 'bl:upload' %}>Upload </a>
+									
+								</li>
+						
+									<li class="menu-item ">
+										<a href="index.html">Library </a>
+										
+									</li>
+								<li class="menu-item ">
+									<a href="artist.html">My Account</a>
+									
+								</li>
+							
+							</ul>
+
+							
+							{% else %}
+							<ul class="group" id="header-menu-magic-line">
+								<!-- <li class="menu-item ">
+									<a href="index.html">Upload </a>
+									
+								</li> -->
+								<li class="menu-item ">
+									<a href={% url 'bl:register' %}>Log In</a>
+									
+								</li>
+								<li class="menu-item">
+									<a href={% url 'bl:register' %}> Sign Up</a>
+									
+								</li>
+							
+							</ul>
+							{% endif %}
+							
+						</div>
+						<!-- /.nav -->
+					</div>
+				</div>
+				<!-- /.tim-container -->
+			</div>
+			<!-- /.header-inner -->
+		</header>
+		<!-- /#header -->
+
+		<div class="offset-menu-two">
+			<a href="#" class="offset-closer"><img src="/static/bl/assets/img/offset-cross2.png" alt=""></a>
+
+			<div class="footer-about">
+				<p> There are many variations of passages of Lorem Ipsum available </p>
+
+				<div class="footer-contact">
+					<div class="contact-details clearfix">
+						<i class="fa fa-phone"></i>
+						<p>Call: +01 245 815 8246</p>
+					</div>
+
+					<div class="contact-details clearfix">
+						<i class="fa fa-envelope"></i>
+						<p> info@yourdomain.com </p>
+					</div>
+
+					<div class="contact-details clearfix">
+						<i class="fa fa-map-marker"></i>
+						<p> 22 No. Street New York, West beas park.New York, USA </p>
+					</div>
+				</div>
+				<!-- /.footer-address -->
+			</div>
+
+
+			<div class="offset-social-two">
+				<a href="">
+					<img src="/static/bl/assets/img/logo_5.png" alt="">
+				</a>
+				<ul>
+					<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+					<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+				</ul>
+			</div>
+		</div>
+
+
+
+		<!--=============================-->
+		<!--=        Mobile Nav         =-->
+		<!--=============================-->
+		<header id="mobile-nav-wrap">
+			<div class="mob-header-inner d-flex justify-content-between">
+				<div id="mobile-logo" class="d-flex justify-content-start">
+					<a href="index.html"><img src="/static/bl/assets/img/logo.png" alt="Site Logo"></a>
+				</div>
+
+				<ul class="user-link nav justify-content-end">
+					<li><a href="#"><i class="fa fa-user"></i>Login</a></li>
+					<li><a href="#"><i class="fa fa-sign-in"></i>Sign Up</a></li>
+				</ul>
+
+				<div id="nav-toggle" class="nav-toggle hidden-md">
+					<div class="toggle-inner">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				</div>
+			</div>
+			<!-- /.mob-header-inner -->
+		</header>
+		<!-- /#mobile-header -->
+
+		<div class="mobile-menu-inner">
+
+			<div class="mobile-nav-top-wrap">
+				<div class="mob-header-inner clearfix">
+					<div class="d-flex justify-content-start mobile-logo">
+						<a href="index.html">
+							<img src="/static/bl/assets/img/logo-dark.png" alt="Site Logo">
+						</a>
+					</div>
+
+					<div class="close-menu">
+						<span class="bar"></span>
+						<span class="bar"></span>
+					</div>
+				</div>
+				<!-- /.mob-header-inner -->
+
+				<div class="close-menu">
+					<span class="bar"></span>
+					<span class="bar"></span>
+				</div>
+			</div>
+			<!-- /.mobile-nav-top-wrap -->
+
+			<nav id="accordian">
+				<ul class="accordion-menu">
+					<li>
+						<a href="#0" class="dropdownlink">Home</a>
+						<ul class="submenuItems">
+							<li><a href="index.html">Home One</a></li>
+							<li><a href="index-two.html">Home Two</a></li>
+							<li><a href="index-three.html">Home Three</a></li>
+							<li><a href="index-four.html">Home Four</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#0" class="dropdownlink">Artist</a>
+						<ul class="submenuItems">
+							<li><a href="artist.html">Artist</a></li>
+							<li><a href="artist-single.html">Artist Details</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="album.html">Album</a>
+					</li>
+					<li>
+						<a href="#0" class="dropdownlink">Events</a>
+						<ul class="submenuItems">
+							<li><a href="event.html">Events</a></li>
+							<li><a href="contact.html">Contact Us</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="tabs.html">Tabs</a>
+
+					</li>
+					<li>
+						<a href="#0" class="dropdownlink">Blog</a>
+						<ul class="submenuItems">
+							<li><a href="blog-list-right.html">Blog Standard</a></li>
+							<li><a href="blog-grid-right.html">Blog Grid</a></li>
+							<li><a href="blog-single.html">Blog Single</a></li>
+						</ul>
+					</li>
+
+					<li>
+						<a href="gallery.html">Gallery</a>
+					</li>
+					<li>
+						<a href="#0" class="dropdownlink">Shop</a>
+						<ul class="submenuItems">
+							<li><a href="shop-right.html">Shop Right</a></li>
+							<li><a href="shop-left.html">Shop Left</a></li>
+							<li><a href="shop-single.html">Shop Details</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<!-- /.mobile-menu-inner -->
+
+
+
+		<!--============================-->
+		<!--=        	Banner         =-->
+		<!--============================-->
+		<section class="banner-five" data-bg-image="/static/bl/media/background/bg5.jpg">
+			<div class="tim-container">
+				<div id="para" class="paralax">
+					<div id="paralax-1" class="scene">
+						<div data-depth="-0.50"><img src="/static/bl/media/background/mouse-move.png" alt=""></div>
+					</div>
+				</div>
+				<div class="baneer-five-content">
+					<div class="content sp-container">
+						<div class="sp-content">
+							<div class="sp-globe"></div>
+							<h2 class="frame-1">Free Music</h2>
+							<h2 class="frame-2">Podcasts</h2>
+							<h2 class="frame-3">Discover</h2>
+							<h2 class="frame-4">Offline Mode</h2>
+
+						</div>
+						<br>
+						<a class="tim-slide-btn" href="#">Download App</a>
+					</div>
+				</div>
+				<!-- /.tim-container -->
+			</div>
+			<!-- /.tim-container -->
+
+			<div class="smoke-wrqpper">
+				<canvas id="canvas"></canvas>
+			</div>
+
+		</section>
+		<!-- /#page-header -->
+
+
+
+		<section class="header_player style-fullwidth">
+
+			<!-- Audio Player -->
+			<div class="player-container-fullwidth">
+
+				<!-- /.current-tracks -->
+				<div id="header_player" class="jp-audio" role="application" aria-label="media player">
+					<div class="jp-type-playlist clearfix">
+						<div class="jp-gui jp-interface">
+							<div class="jp-controls">
+								<button class="jp-play" tabindex="0"><i class="fa fa-play"></i></button>
+							</div>
+							<!-- Display the track inside player -->
+
+							<div class="current-tracks">
+								<div id="main_player" class="jp-jplayer">
+
+								</div>
+								<div id="nowPlaying">
+									<h3 class="track-name"></h3>
+									<span class="artist-name"></span>
+								</div>
+								<!-- #nowPlaying -->
+							</div>
+							<!-- /.current-tracks -->
+
+							<div class="jp-progress">
+								<div class="jp-seek-bar">
+									<div class="jp-play-bar"></div>
+								</div>
+							</div>
+
+							<div class="jp-duration" role="timer" aria-label="duration"></div>
+
+							<div class="vel-wrap">
+								<button class="jp-mute" tabindex="0"><i class="fa fa-volume-up"></i></button>
+
+								<div class="jp-volume-bar">
+									<div class="jp-volume-bar-value"></div>
+								</div>
+
+							</div>
+							<!-- /.vel-wrap -->
+
+							<button id="playlist-toggle" class=""><i class="fa fa-list"></i></button>
+
+							<!-- Playlist -->
+							<div class="jp-playlist">
+								<ul>
+									<li></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+
+
+
+		<!--==============================-->
+		<!--=        	Artist lineup         =-->
+		<!--==============================-->
+		<section class="section-padding-two artist-lineup">
+			<div class="tim-container clearfix">
+				<div class="row">
+					<div class="section-title style-four">
+						<h2>Enjoy Music</h2>
+						<p>We bring the tunes.Save tracks, follow artists and build playlists. All for free.</p>
+					</div>
+				</div>
+				
+			</div>
+			<!-- /.tim-container -->
+		</section>
+		<!-- /#about -->
+
+
+	
+	
+		<!--==============================-->
+		<!--=        	Latest release         =-->
+		<!--==============================-->
+		<section class="section-padding latest-relese">
+			<div class="container">
+				<div class="row">
+					<div class="section-title style-four">
+						<!-- <h2>LATEST RELEASE</h2> -->
+					</div>
+					<div class="d-flex justify-content-center">
+						<div class="col-xl-10" id="moving-player">
+							<div class="row">
+								<div class="col-sm-4 col-md-5 col-lg-4">
+									<div class="latest-album-left">
+									
+										<div class="albun-details">
+										
+											<h6>ALBUM INFO</h6>
+											<p>Mos
+												<span>“HEAVEN”</span>. Officialy the album released on May 19, 2018 in Harmonik Studio, Venice. This <span>Alternative Rock</span> Band made 12 songs with total 36:20 minutes timeline.</p>
+										
+										</div>
+									</div>
+
+								</div>
+								
+								<div class="col-sm-4 col-md-5 col-lg-4">
+									<div class="latest-album-left">
+									
+										<div class="albun-details">
+										
+											<h6>ALBUM INFO</h6>
+											<p>Mos
+												<span>“HEAVEN”</span>. Officialy the album released on May 19, 2018 in Harmonik Studio, Venice. This <span>Alternative Rock</span> Band made 12 songs with total 36:20 minutes timeline.</p>
+										
+										</div>
+									</div>
+
+								</div>
+
+								<div class="col-sm-4 col-md-5 col-lg-4">
+									<div class="latest-album-left">
+									
+										<div class="albun-details">
+										
+											<h6>ALBUM INFO</h6>
+											<p>Mos
+												<span>“HEAVEN”</span>. Officialy the album released on May 19, 2018 in Harmonik Studio, Venice. This <span>Alternative Rock</span> Band made 12 songs with total 36:20 minutes timeline.</p>
+										
+										</div>
+									</div>
+
+								</div>
+
+
+								
+
+
+
+
+								<div class="bubble-wrap">
+									<div class="bubble icon-1"></div>
+									<div class="bubble icon-2 "></div>
+									<div class="bubble icon-3"></div>
+									<div class="bubble icon-4"></div>
+
+									<div class="bubble icon-5"></div>
+									<div class="bubble icon-2 "></div>
+									<div class="bubble icon-4"></div>
+									<div class="bubble icon-5"></div>
+
+									<div class="bubble icon-1"></div>
+									<div class="bubble icon-2 "></div>
+
+
+									<div class="bubble icon-5"></div>
+									<div class="bubble icon-3"></div>
+									<div class="bubble icon-3"></div>
+
+									<div class="bubble icon-2 "></div>
+									<div class="bubble icon-3"></div>
+									<div class="bubble icon-1"></div>
+									<div class="bubble icon-2 "></div>
+									<div class="bubble icon-3"></div>
+									<div class="bubble icon-4"></div>
+									<div class="bubble icon-4"></div>
+									<div class="bubble icon-1"></div>
+									<div class="bubble icon-5"></div>
+									<div class="bubble icon-1"></div>
+									<div class="bubble icon-2 "></div>
+									<div class="bubble icon-4"></div>
+									<div class="bubble icon-5"></div>
+									<div class="bubble icon-1"></div>
+									<div class="bubble icon-2 "></div>
+									<div class="bubble icon-1"></div>
+									<div class="bubble icon-2 "></div>
+									<div class="bubble icon-4"></div>
+									<div class="bubble icon-5"></div>
+									<div class="bubble icon-5"></div>
+									<div class="bubble icon-1"></div>
+									<div class="bubble icon-4"></div>
+									<div class="bubble icon-5"></div>
+									<div class="bubble icon-3"></div>
+									<div class="bubble icon-4"></div>
+									<div class="bubble icon-2 "></div>
+									<div class="bubble icon-3"></div>
+									<div class="bubble icon-3"></div>
+									<div class="bubble icon-4"></div>
+									<div class="bubble icon-1"></div>
+									<div class="bubble icon-5"></div>
+									<div class="bubble icon-2 "></div>
+									<div class="bubble icon-3"></div>
+									<div class="bubble icon-1"></div>
+									<div class="bubble icon-3"></div>
+									<div class="bubble icon-4"></div>
+									<div class="bubble icon-5"></div>
+
+								</div>
+
+								<div class="bubble-wrap-right">
+									<div class="bubble icon-1"></div>
+									<div class="bubble icon-2 "></div>
+									<div class="bubble icon-3"></div>
+									<div class="bubble icon-4"></div>
+
+									<div class="bubble icon-5"></div>
+									<div class="bubble icon-2 "></div>
+									<div class="bubble icon-4"></div>
+									<div class="bubble icon-5"></div>
+
+									<div class="bubble icon-1"></div>
+									<div class="bubble icon-2 "></div>
+
+
+									<div class="bubble icon-5"></div>
+									<div class="bubble icon-3"></div>
+									<div class="bubble icon-3"></div>
+
+									<div class="bubble icon-2 "></div>
+									<div class="bubble icon-3"></div>
+									<div class="bubble icon-1"></div>
+									<div class="bubble icon-2 "></div>
+									<div class="bubble icon-3"></div>
+									<div class="bubble icon-4"></div>
+									<div class="bubble icon-4"></div>
+									<div class="bubble icon-1"></div>
+
+									<div class="bubble icon-5"></div>
+
+									<div class="bubble icon-1"></div>
+									<div class="bubble icon-2 "></div>
+
+									<div class="bubble icon-4"></div>
+									<div class="bubble icon-5"></div>
+									<div class="bubble icon-1"></div>
+									<div class="bubble icon-2 "></div>
+									<div class="bubble icon-1"></div>
+
+									<div class="bubble icon-2 "></div>
+									<div class="bubble icon-4"></div>
+									<div class="bubble icon-5"></div>
+									<div class="bubble icon-5"></div>
+									<div class="bubble icon-1"></div>
+									<div class="bubble icon-4"></div>
+									<div class="bubble icon-5"></div>
+									<div class="bubble icon-3"></div>
+									<div class="bubble icon-4"></div>
+
+									<div class="bubble icon-2 "></div>
+									<div class="bubble icon-3"></div>
+
+									<div class="bubble icon-3"></div>
+									<div class="bubble icon-4"></div>
+									<div class="bubble icon-1"></div>
+									<div class="bubble icon-5"></div>
+									<div class="bubble icon-2 "></div>
+									<div class="bubble icon-3"></div>
+									<div class="bubble icon-1"></div>
+									<div class="bubble icon-3"></div>
+									<div class="bubble icon-4"></div>
+									<div class="bubble icon-5"></div>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /.latest-album-info -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.tim-container -->
+		</section>
+		<!-- /#about -->
+
+
+
+		<!--==============================-->
+		<!--=        	Latest album         =-->
+		<!--==============================-->
+		<section class="three-d-album">
+			<div class="section-title style-four">
+				<!-- <h2>TRENDING RELEASES</h2> -->
+				<!-- <p>There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some injected humour.</p> -->
+			</div>
+		
+			
+			<!-- /.tim-container -->
+		</section>
+		<!-- /#about -->
+
+
+
+		<!--==============================-->
+		<!--=        	Show schedule        =-->
+		<!--==============================-->
+		<section class="show-archive">
+			<div class="container">
+				<div class="d-flex justify-content-center row">
+					<div class="col-xl-10">
+						<div class="section-title style-five">
+							<h2>Pod For Creators</h2>
+							<p>There are many variations of passages of Lorem Ipsum available but the majority.</p>
+						</div>
+						<div class="show-archive-wrapper row no-gutters">
+							<div class="offset-xs-0 offset-sm-4 col-sm-4 col-6">
+								<div class="single-show-archive">
+									<img src="/static/bl/media/album/18.jpg" alt="">
+									<a href="#"><i class="fa fa-link" aria-hidden="true"></i>
+							</a>
+								</div>
+							</div>
+							<div class="col-6 col-sm-4">
+								<div class="single-show-archive">
+									<img src="/static/bl/media/album/19.jpg" alt="">
+									<a href="#"><i class="fa fa-link" aria-hidden="true"></i>
+							</a>
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-8">
+								<div class="single-show-archive video-archive">
+									<img src="/static/bl/media/album/20.jpg" alt="">
+									<div class="video-player">
+										<a href="https://www.youtube.com/watch?v=0I8GmbDU7c4" class="video-btn-three popup-video-btn">
+									<i class="fa fa-play"></i>
+								</a>
+										<div class="video-btn-shade">
+											<i class="fa fa-play"></i>
+										</div>
+										<div class="text">
+											<p>Show Stoppers Time</p>
+											<span>(Live in Tokyo, 2017)</span>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<div class="col-12 col-sm-4">
+								<div class="single-show-archive">
+									<img src="/static/bl/media/album/21.jpg" alt="">
+									<a href="#"><i class="fa fa-link" aria-hidden="true"></i>
+	</a>
+								</div>
+							</div>
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /.col-xl -->
+				</div>
+				<!-- /.row -->
+			</div>
+		</section>
+		<!-- /#about -->
+
+	
+
+
+		<!--============================-->
+		<!--=        	Spotlight          =-->
+		<!--============================-->
+
+		<!-- /#about -->
+
+
+
+
+
+
+
+
+		<!--==============================-->
+		<!--=        	Footer         	 =-->
+		<!--==============================-->
+
+		<footer id="footer-3">
+			<div class="container">
+				<div class="d-flex justify-content-center row">
+					<div class="col-xl-10">
+					
+						<div class="footer-three-bottom">
+							<div class="footer-three-left">
+								<a href="#">
+									<img src="/static/bl/assets/img/logo_5_dark.png" alt="">
+								</a>
+								<p>There are many variations of passages of Lorem Ipsum available but the majority. We
+									are proud there are many variations of passages of Lorem Ipsum available but the
+									majority of the users does use this.</p>
+							</div>
+							<div class="footer-three-right">
+								<ul class="footer-three-menu">
+									<li><a href="#">Rules</a></li>
+									<li><a href="#">Terms of use</a></li>
+									<li><a href="#">Tickets</a></li>
+									<li><a href="#">policy</a></li>
+								</ul>
+								<div class="footer-social-three">
+									<ul>
+										<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+										<li><a href="#"><i class="fa fa-youtube-play"></i></a></li>
+										<li><a href="#"><i class="fa fa-cloud"></i></a></li>
+										<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+										<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+										<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+										<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+										<li><a href="#"><i class="fa fa-vine"></i></a></li>
+										<li><a href="#"><i class="fa fa-apple"></i></a></li>
+										<li><a href="#"><i class="fa fa-vimeo"></i></a></li>
+									</ul>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<!-- /.col-xl- -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container -->
+		</footer>
+		<!-- /#footer -->
+
+		<div class="backtotop">
+			<i class="fa fa-angle-up backtotop_btn"></i>
+		</div>
+
+
+	</div>
+	<!-- /#site -->
+	<!-- Dependency Scripts -->
+	<script src="/static/bl/dependencies/jquery/jquery.min.js"></script>
+	<script src="/static/bl/dependencies/jquery-ui/jquery-ui.min.js"></script>
+	<script src="/static/bl/dependencies/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/static/bl/dependencies/swiper/js/swiper.min.js"></script>
+	<script src="/static/bl/dependencies/swiperRunner/swiperRunner.min.js"></script>
+	<script src="/static/bl/dependencies/wow/js/wow.min.js"></script>
+	<script src="/static/bl/dependencies/jquery.countdown/jquery.countdown.min.js"></script>
+	<script src="/static/bl/dependencies/magnific-popup/js/jquery.magnific-popup.min.js"></script>
+	<script src="/static/bl/dependencies/jquery.spinner/js/jquery.spinner.js"></script>
+	<script src="/static/bl/dependencies/isotope-layout/isotope.pkgd.min.js"></script>
+	<script src="/static/bl/dependencies/masonry-layout/masonry.pkgd.min.js"></script>
+	<script src="/static/bl/dependencies/imagesloaded/imagesloaded.pkgd.min.js"></script>
+	<script src="/static/bl/dependencies/slick-carousel/js/slick.min.js"></script>
+	<script src="/static/bl/assets/js/headroom.js"></script>
+	<script src="/static/bl/assets/js/soundmanager2.js"></script>
+	<script src="/static/bl/assets/js/mp3-player-button.js"></script>
+	<script src="/static/bl/assets/js/smoke.js"></script>
+	<script src="/static/bl/dependencies/FitText.js/js/jquery.fittext.js"></script>
+	<script src="/static/bl/dependencies/gmap3/js/gmap3.min.js"></script>
+	<script src='http://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenMax.min.js'></script>
+	<script src='/static/bl/dependencies/tilt.js/js/tilt.jquery.js'></script>
+	<script src='/static/bl/assets/js/parallax.min.js'></script>
+	<!-- Player -->
+	<script src="/static/bl/dependencies/jPlayer/js/jquery.jplayer.min.js"></script>
+	<script src="/static/bl/dependencies/jPlayer/js/jplayer.playlist.min.js"></script>
+	<script src="/static/bl/assets/js/myplaylist.js"></script>
+
+
+	<!--Google map api -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsBrMPsyNtpwKXPPpG54XwJXnyobfMAIc"></script>
+
+	<!-- Site Scripts -->
+	<script src="/static/bl/assets/js/app.js"></script>
+
+
+</body>
+
+</html>

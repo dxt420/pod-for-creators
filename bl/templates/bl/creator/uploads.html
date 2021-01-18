@@ -1,0 +1,281 @@
+{% extends "bl/creator/base.html" %}
+
+
+
+
+
+
+
+
+{% block head %}
+
+
+
+
+{% endblock head %}
+
+{% block content %}
+
+
+
+
+<section id="basic-tabs-components">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                <h4>My Media</h4>
+            </div>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <p>Browse through all your <code>Pod</code> media.</p>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="tracks-tab" data-toggle="tab" href="#tracks"
+                            aria-controls="tracks" role="tab" aria-selected="true">
+                            <i class="bx bx-home align-middle"></i>
+                            <span class="align-middle">Tracks</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="albums-tab" data-toggle="tab" href="#albums" aria-controls="albums"
+                            role="tab" aria-selected="false">
+                            <i class="bx bx-user align-middle"></i>
+                            <span class="align-middle">Albums</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="podcast-tab" data-toggle="tab" href="#podcast" aria-controls="podcast"
+                            role="tab" aria-selected="false">
+                            <i class="bx bx-message-square align-middle"></i>
+                            <span class="align-middle">Podcasts</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" id="lyrics-tab" data-toggle="tab" href="#lyrics" aria-controls="lyrics"
+                            role="tab" aria-selected="false">
+                            <i class="bx bx-message-square align-middle"></i>
+                            <span class="align-middle">Lyrics</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tracks" aria-labelledby="tracks-tab" role="tabpanel">
+ <!-- datatable start -->
+ <div class="table-responsive">
+    {% if myuploads %}
+    <table id="table-extended-chechbox" class="table table-transparent">
+
+        <thead>
+            <tr>
+                <th></th>
+                <th class="pl-0">name</th>
+                <th>date added</th>
+                <th>duration</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for upload in myuploads  %}
+
+            <tr>
+                <td></td>
+
+
+                {% if upload.cover %}
+                <td class="text-bold-600 pl-0"><img src="{{upload.cover}}" alt="file" class="mr-1" height="36"
+                        width="36">
+                    <a href={% url 'bl:uploaddetail' upload.track_id %} >{{upload.title}}</a>
+                
+                </td>
+                {% else %}
+
+                <td class="text-bold-600 pl-0"><img src="/static/bl/app-assets/images/album.png" alt="file"
+                        class="mr-1" height="36" width="36">
+                     <a href={% url 'bl:uploaddetail' upload.track_id %} >{{upload.title}}</a>
+                    
+                </td>
+                {% endif %}
+
+
+
+
+                <td>{{upload.created_at}}</td>
+                <td>{{upload.duration}}</td>
+                {% comment %} <td>--:--</td> {% endcomment %}
+                <td>
+                    <div class="dropdown">
+                        <span
+                            class="bx bx-dots-horizontal-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">
+                        </span>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#"><i class="bx bx-edit-alt mr-1"></i> edit</a>
+                            <a class="dropdown-item" href="#"><i class="bx bx-trash mr-1"></i>
+                                delete</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+
+            {% endfor %}
+
+
+
+
+
+
+        </tbody>
+    </table>
+
+
+    {% else %}
+
+
+
+
+    <div class="card-content">
+        <div class="card-body text-center bg-transparent miscellaneous">
+            <img src="/static/bl/app-assets/images/pages/maintenance-2.png" class="img-fluid"
+                alt="under maintenance" width="400">
+            <h1 class="error-title my-1">No Media</h1>
+            <p class="px-2">
+                Seems a little quiet over here, upload something to share!
+            </p>
+            <a href={% url 'bl:uploadtype' %} class="btn btn-primary round glow mt-2">Upload now</a>
+        </div>
+    </div>
+
+
+    {% endif %}
+</div>
+<!-- datatable ends -->
+                    </div>
+                    <div class="tab-pane" id="albums" aria-labelledby="albums-tab" role="tabpanel">
+ {% if myalbums %}
+
+   <table id="table-extended-chechbox" class="table table-transparent">
+
+        <thead>
+     
+        </thead>
+        <tbody>
+
+            {% for album in myalbums  %}
+
+            {% comment %} <tr>
+              
+
+
+                {% if album.cover %}
+                <td class="text-bold-600 pl-0"><img src="{{album.cover}}" alt="file" class="mr-1" height="200"
+                        width="200">
+                    <a href={% url 'bl:uploaddetail' album.album_id %} >{{album.title}}</a>
+                
+                </td>
+                {% else %}
+
+                <td class="text-bold-600 pl-0"><img src="/static/bl/app-assets/images/album.png" alt="file"
+                        class="mr-1" height="200" width="200">
+                     <a href={% url 'bl:uploaddetail' album.album_id %} >{{album.title}}</a>
+                    
+                </td>
+                {% endif %}
+
+
+
+
+                <td>{{album.created_at}}</td>
+            
+                <td>
+                    <div class="dropdown">
+                        <span
+                            class="bx bx-dots-horizontal-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">
+                        </span>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#"><i class="bx bx-edit-alt mr-1"></i> edit</a>
+                            <a class="dropdown-item" href="#"><i class="bx bx-trash mr-1"></i>
+                                delete</a>
+                        </div>
+                    </div>
+                </td>
+            </tr> {% endcomment %}
+
+
+
+
+            {% endfor %}
+
+
+
+
+
+
+        </tbody>
+    </table>
+
+    {% else %}
+
+
+
+
+    <div class="card-content">
+        <div class="card-body text-center bg-transparent miscellaneous">
+            <img src="/static/bl/app-assets/images/pages/maintenance-2.png" class="img-fluid"
+                alt="under maintenance" width="400">
+            <h1 class="error-title my-1">No Albums</h1>
+            <p class="px-2">
+                To share your albums, create and organize tracks that you have already uploaded
+            </p>
+            <a href={% url 'bl:uploadalbum' %} class="btn btn-primary round glow mt-2">Album Mode</a>
+        </div>
+    </div>
+
+
+    {% endif %}
+                    </div>
+                    <div class="tab-pane" id="podcast" aria-labelledby="podcast-tab" role="tabpanel">
+
+                    </div>
+
+                    <div class="tab-pane" id="lyrics" aria-labelledby="lyrics-tab" role="tabpanel">
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+
+
+
+
+
+
+
+
+
+{% endblock scripts %}

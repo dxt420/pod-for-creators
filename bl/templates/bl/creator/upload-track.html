@@ -1,0 +1,749 @@
+{% extends "bl/creator/base.html" %}
+
+{% load mytags %}
+
+
+{% block head %}
+
+
+
+
+<style>
+  .avatar-upload {
+    position: relative;
+    max-width: 205px;
+    margin: 20px;
+  }
+
+  .avatar-edit {
+    position: absolute;
+    right: 12px;
+    z-index: 1;
+    top: 10px;
+
+  }
+
+  .avatar-edit>input {
+    display: none;
+  }
+
+  .avatar-edit>input+label {
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+    margin-bottom: 0;
+    // border-radius: 100%;
+    background: #FFFFFF;
+    border: 1px solid transparent;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    font-weight: normal;
+    transition: all .2s ease-in-out;
+
+  }
+
+  .avatar-edit>input &:hover {
+    background: #f1f1f1;
+    border-color: #d6d6d6;
+  }
+
+  .avatar-edit>input &:after {
+    content: "\f040";
+    font-family: 'FontAwesome';
+    color: #757575;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin: auto;
+  }
+
+
+
+  .avatar-preview {
+    width: 192px;
+    height: 192px;
+    position: relative;
+    // border-radius: 100%;
+    border: 6px solid #F8F8F8;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+  }
+
+  .avatar-preview>div {
+    width: 100%;
+    height: 100%;
+    // border-radius: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+</style>
+{% endblock head %}
+
+{% block content %}
+<!-- Dropzone section start -->
+
+
+
+
+
+
+
+<section id="dropzone-examples">
+
+
+
+
+
+  <!-- warnings and info alerts starts -->
+
+
+  <!-- <div class="row">
+    <div class="col-12">
+      <div class="alert bg-rgba-warning" role="alert">
+        <strong>Warning!</strong> Don’t forget to specify an url option if you’re not using a form element, since
+        Dropzone doesn’t know where to post to without an action attribute.
+      </div>
+      <div class="alert bg-rgba-warning " role="alert">
+        <strong>Warning!</strong> Dropzone does not handle your file uploads on the server. You have to implement the
+        code to receive and store the file yourself. See the section <a
+          href="http://www.dropzonejs.com/#server-side-implementation" class="alert-link">Server side implementation</a>
+        for more information.
+      </div>
+      <div class="alert bg-rgba-primary" role="alert">
+        <strong>Info: </strong>
+        We have changed path of error and success mark from vendor's css.
+      </div>
+    </div>
+  </div> -->
+
+
+
+  <!-- warnings and info alerts ends -->
+
+
+
+  <!-- accepted file upload starts -->
+  <div id="formerDiv" class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="text-center">
+            <h4 class="card-title">Upload your music to Pod!</h4>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-body">
+            <div class="text-center">
+              <p class="card-text">Uploading initiates your acceptance of our <code>Terms of Service</code> and
+                <code>Privacy Policy</code>.</p>
+            </div>
+            <br>
+
+
+
+            <form action="#" class="dropzone dropzone-area" id="dp-accept-files" data-plugin="dropzone">
+              <div class="dz-message">Drag and drop your tracks here</div>
+              {% csrf_token %}
+            </form>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- accepted file upload ends -->
+
+
+
+
+  <div id="basicInfo" style="visibility: hidden">
+    <div class="card">
+      <div class="card-header">
+        <div class="text-center">
+          <h4 class="card-title">Upload your music to Pod - Basic Info</h4>
+        </div>
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+          <div class="text-center">
+            <p class="card-text">Uploading initiates your acceptance of our <code>Terms of Service</code> and
+              <code>Privacy Policy</code>.</p>
+          </div>
+
+
+          <div id="submitter1" class="media-list media-bordered">
+
+            <form id="songFormer" method="post" enctype="multipart/form-data">
+
+
+              {% csrf_token %}
+              <div id="former">
+
+
+
+              </div>
+
+
+              <div class="col-sm-12 d-flex justify-content-end">
+
+
+
+                <button type="submit" class="btn btn-primary mr-1 mb-1 block-page ">
+
+                  Submit</button>
+
+
+                
+
+
+
+                <a href={% url 'bl:upload' %} id="canceller" type="reset" class="btn btn-danger mr-1 mb-1">Cancel</a>
+              </div>
+
+
+
+
+
+            </form>
+          </div>
+
+
+
+
+          <div class="card" id="submitter2" style="display: none ">
+            <div class="card-header">
+
+            </div>
+            <div class="card-content">
+              <div class="card-body">
+                <div class="text-center">
+                  <p>Hold tight ... Upload in progress </p>
+
+
+                  <div class="spinner-border spinner-border-lg" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+
+  {% endblock content %}
+
+
+  {% block scripts %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.3/jsmediatags.min.js"
+    integrity="sha512-gQ6HBTG0fuB5lRb4v9YJtFPyKUBGlaK1o6cmzqt6umBCyi4S1XdCg/hVptb1XLs1MTkUtCH6rZSI0a+eJJLkXQ=="
+    crossorigin="anonymous"></script>
+
+   
+   
+
+
+  <script>
+    //var upload = new FileUploadWithPreview('myUniqueUploadId')
+    //console.log(upload)
+
+
+
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+          $('#imagePreview').hide();
+          $('#imagePreview').fadeIn(650);
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+    $("#imageUpload").change(function () {
+      readURL(this);
+    });
+  </script>
+
+
+  <script>
+    var jsmediatags = window.jsmediatags
+
+
+
+    Dropzone.options.dpAcceptFiles = {
+      acceptedFiles: ".mp3,.m4a,.wav,.flac,.alac,.aiff",
+      maxFiles: 2,
+      // addRemoveLinks: true,
+      init: function () {
+        this.on("complete", function (file) {
+          // this.removeFile(file); 
+          // alert("Complete."); 
+          // console.log(file);
+          //    $('.treanding_songs_wrapper').remove();
+        });
+
+        this.on("addedfile", async function (file) {
+
+          let blob, audioTags
+          //
+          //
+
+          var audioSrc = URL.createObjectURL(file)
+
+
+          const toBase64 = file => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+          });
+
+
+
+          try {
+
+            const resp = await fetch(audioSrc)
+            if (resp.status === 200) {
+              blob = await resp.blob()
+              console.log(blob)
+
+              //console.log()
+
+
+
+              var reader = new FileReader();
+              var audio = document.createElement('audio');
+          
+             
+
+       
+              reader.readAsDataURL(file);
+
+               reader.onload = function (e) {
+                    audio.src = e.target.result
+                    audio.addEventListener('durationchange', function () {
+                      console.log("durationchange: " + audio.duration);
+
+
+                        jsmediatags.read(blob, {
+
+                onSuccess: (tag) => {
+                  console.log(tag)
+                  audioTags = tag
+                  // json.textContent = JSON.stringify(tag)
+
+                  if (audioTags.tags.picture) {
+                    console.log(audioTags.tags.picture);
+                    var picture = audioTags.tags.picture; // create reference to track art
+                    var base64String = "";
+                    for (var i = 0; i < picture.data.length; i++) {
+                      base64String += String.fromCharCode(picture.data[i]);
+                    }
+                    var imageUri = "data:" + picture.format + ";base64," + window.btoa(base64String);
+                    // console.log(imageUri);
+
+
+                  }
+
+
+                 
+
+             
+                  //console.log("SEXxxxx")
+                  //console.log(file)
+                  toBase64(file).then(function (value) {
+
+
+                    console.log("Hi Bih")
+                    console.log(audio.duration);
+                    var durStr =  Math.floor(audio.duration / 60) + ":" + Math.floor(audio.duration - Math.floor(audio.duration / 60) * 60);
+                    console.log(durStr)
+
+
+
+                  var scratch="";
+                  var title = "";
+                  var artist = "";
+                  var year = "";
+
+                  if(audioTags.tags.title){
+                    title = audioTags.tags.title
+                  } 
+                 if(audioTags.tags.artist){
+                    artist = audioTags.tags.artist
+                  } 
+                  if(audioTags.tags.year){
+                    year = audioTags.tags.year
+                  } 
+if(imageUri){
+                  
+                     scratch +=
+
+                    
+
+                      `
+             
+
+
+
+<div class="media">
+ <div class="avatar-upload">
+        <div class="avatar-edit">
+            <input type='file' id="imageUpload"  accept=".png, .jpg, .jpeg" />
+            <label for="imageUpload"></label>
+
+
+  <input type="hidden" id="imageHolder" value=` + imageUri + ` name="imageUpload" />
+
+
+
+        </div>
+        <div class="avatar-preview">
+            <div id="imagePreview" style="background-image: url('` + imageUri + `');">
+            </div>
+        </div>
+    </div>
+
+
+`
+
+
+ }else{
+
+   scratch +=
+
+`
+
+
+<div class="media">
+ <div class="avatar-upload">
+        <div class="avatar-edit">
+            <input type='file' id="imageUpload"  accept=".png, .jpg, .jpeg" />
+            <label for="imageUpload"></label>
+
+
+  <input type="hidden" id="imageHolder" name="imageUpload" />
+
+
+
+        </div>
+        <div class="avatar-preview">
+            <div id="imagePreview" style="background-image: url('/static/bl/app-assets/images/album.png');">
+            </div>
+        </div>
+    </div>
+
+  
+
+`
+
+}
+
+               scratch +=  
+`
+  <input type="hidden" name="songFile" value="` + value + `"  />
+
+
+
+               
+                <div class="media-body">
+
+<div class="row">
+                
+                  <div class="col-lg-6">
+                          <label>Title</label>
+                            <input type="text" name="title" class="form-control" value="` + title + `" placeholder="What is the title of this track" required> 
+
+</div>
+   <div class="col-lg-6">
+                          <label>Artist</label>
+                            <input type="text" name="artist" class="form-control" value="` + artist + `" placeholder="Type in the artist name" required> 
+
+</div>
+    </div>
+
+
+                                  <div class="row">
+  <div class="col-lg-6">
+                                  <label>Year</label>
+                            <input type="text" name="year" class="form-control" value="` + year + `" > 
+                                
+                              </div>
+
+                              <div class="col-lg-6">
+                             <label>Duration</label>
+                          <input type="text" name="duration" class="form-control" value="` + durStr + `"  required readonly="readonly"> 
+                                </div>
+
+                                  </div>
+
+                            <label>Description (Optional)</label>
+                        <textarea name="description" class="form-control" rows="6" placeholder="hmm.."></textarea>
+                  {% comment %} <h4 class="media-heading">Cookie candy</h4>
+                  Cookie candy dragée marzipan gingerbread pie pudding. Brownie fruitcake wafer bonbon gummi bears apple
+                  pie. Brownie lemon drops chocolate cake donut croissant cotton candy. {% endcomment %}
+                </div>
+              </div>
+         
+
+                               `
+                               
+                               
+                              ;
+
+
+
+                    document.getElementById("former").innerHTML += scratch;
+
+                    document.getElementById("formerDiv").style.visibility = "hidden";
+                    document.getElementById("formerDiv").style.height = "0px";
+                   document.getElementById("basicInfo").style.visibility = "visible";
+
+                
+
+                  
+
+                  });
+                },
+                onError: (e) => {
+                  console.log(e)
+                }
+              })  
+                      
+                   
+                    }, false);
+
+                    audio.addEventListener('onerror', function () {
+                      alert("Cannot get duration of this file.");
+                    }, false);
+                  };
+              // parse blob instead of file
+
+      
+            
+
+            }
+
+            
+          } catch (e) {
+            console.log(e)
+          }
+
+
+
+        });
+
+
+      }
+    };
+
+
+
+
+
+    function addSong() {
+      // var feat = document.getElementsByClassName('feat'+a);
+      // for (var i = 0; i < feat.length; i++) { 
+      //     if (feat[i].checked) {
+      //         console.log(feat[i].value);
+      //         document.getElementById('featured'+a).value = feat[i].value;
+
+      //     }else{
+      //     }
+      //     // feat[i].disabled = false;
+      // }
+      // var feat = document.querySelector('input[name="rsvp"]:checked').value;
+
+    
+      // });
+    }
+
+
+
+    $("#songFormer").on('submit', function() {
+  
+    event.preventDefault(); 
+   var frm = $('#songFormer');
+      var urlx = "{% url 'bl:addsong' %}";
+      // var urly = urlx.replace('123',a);
+      // frm.submit(function () {
+      //   console.log($('#imageUpload').val());
+      console.log(frm.serialize());
+      // console.log(new FormData($('#songFormer')));
+      // var data = new FormData(document.getElementById("songFormer"));
+      //  var form_data = new FormData($('#songFormer')[0]);
+      //  console.log("Created FormData, " + [...form_data.keys()].length + " keys in data");
+      // console.log(form_data);
+
+
+    //   document.getElementById("submitter1").style.display = "none";
+              //  //    document.getElementById("submitter1").style.width = "0px";
+              //      document.getElementById("submitter2").style.display = "block";
+              //    //  document.getElementById("canceller").style.display = "none";
+
+                  var message = $('.multiple-msgs');
+
+$.blockUI({
+  message: '<div class="bx bx-revision icon-spin font-medium-4"></div>',
+  overlayCSS: {
+    backgroundColor: '#fff',
+    opacity: 0.8,
+    cursor: 'wait'
+  },
+  css: {
+    // width: 200,
+    border: 0,
+    padding: 0,
+    backgroundColor: 'transparent'
+  },
+  onBlock: function () {
+    clearTimeout();
+  }
+});
+
+
+
+
+      $.ajax({
+        type: 'post',
+        url: urlx,
+        data: frm.serialize(),
+        async: true,
+        //  processData: false,
+        // contentType: false,
+        success: function (data) {
+
+          // document.getElementById('cartCounter').setAttribute("data-badge", data.total_items);
+          console.log("pass");
+         // frm.hide();
+
+          console.log(data);
+
+         //  document.getElementById("submitter2").style.display = "none";
+        //    document.getElementById("successor").style.display = "block";
+
+       // window.setTimeout(function () {
+       //   message.addClass('bg-success').html('<div class="semibold"><span class="icon-thumbs-o-up text-left"></span>&nbsp; Success</div>');
+       // }, 0);
+
+//window.setTimeout(function () {
+ 
+  $.unblockUI({
+    onUnblock: function () {
+     // message.removeClass('bg-success');
+      window.location.href = 'uploads'
+
+    }
+  });
+//}, 6000);
+
+
+        },
+        error: function (data) {
+          // $("#MESSAGE-DIV").html("Something went wrong!");
+          console.log("fail");
+          console.log(data);
+
+        }
+      });
+      return false;
+
+});
+  </script>
+
+  <script>
+    function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+          var cookie = jQuery.trim(cookies[i]);
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+
+    function csrfSafeMethod(method) {
+      // these HTTP methods do not require CSRF protection
+      return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    $.ajaxSetup({
+      beforeSend: function (xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+          xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+      }
+    });
+
+
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        var imageData;
+
+
+        reader.onload = (e) => {
+          $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+          $('#imagePreview').hide();
+          $('#imagePreview').fadeIn(650);
+          // $('#fileHolder').val(e.target.result+"");
+          // console.log(e.target.result);
+
+          imageData = e.target.result + "";
+          $('#imageHolder').val(imageData);
+          // console.log(imageData);
+        }
+
+
+
+        reader.readAsDataURL(input.files[0]);
+
+
+
+        console.log(input.files[0]);
+
+
+        //// 
+      }
+    }
+    // $("#imageUpload").change(function () {
+    //     readURL(this);
+    // });
+
+
+    $(document).on('change', '#imageUpload', function () {
+      readURL(this);
+    });
+  </script>
+
+
+  {% endblock scripts %}

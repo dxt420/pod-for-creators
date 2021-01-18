@@ -40,23 +40,23 @@ class PlaylistDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 class SongCreateView(generics.ListCreateAPIView):
 
-    queryset = Song.objects.all()
+    queryset = Upload.objects.all()
     serializer_class = SongSerializer
 
   
 
 class ArtistSongsCreateView(generics.ListCreateAPIView):
 
-    # queryset = Song.objects.filter()
+    # queryset = Upload.objects.filter()
     serializer_class = SongSerializer
 
     # def get_queryset(self):
-    #     queryset = Song.objects.filter(artist_name=self.request.query_params.get('artist_username'))
+    #     queryset = Upload.objects.filter(artist_name=self.request.query_params.get('artist_username'))
     #     return queryset
 
     def get_queryset(self):
  
-        queryset = Song.objects.all()
+        queryset = Upload.objects.all()
         name = self.request.query_params.get('artist_username', None)
         # if username is not None:
         queryset = queryset.filter(added_by=name)
@@ -65,17 +65,17 @@ class ArtistSongsCreateView(generics.ListCreateAPIView):
 
 class ArtistSongsView(generics.RetrieveUpdateDestroyAPIView):
 
-    queryset = Song.objects.all()
+    queryset = Upload.objects.all()
     serializer_class = SongSerializer
     lookup_field = 'added_by'
 
     # def get_queryset(self):
-    #     queryset = Song.objects.filter(artist_name=self.request.query_params.get('artist_username'))
+    #     queryset = Upload.objects.filter(artist_name=self.request.query_params.get('artist_username'))
     #     return queryset
 
     # def get_queryset(self):
  
-    #     queryset = Song.objects.all()
+    #     queryset = Upload.objects.all()
     #     name = self.request.query_params.get('artist_username', None)
     #     # if username is not None:
     #     queryset = queryset.filter(added_by=name)
@@ -83,7 +83,7 @@ class ArtistSongsView(generics.RetrieveUpdateDestroyAPIView):
 
 class SongDetailView(generics.RetrieveUpdateDestroyAPIView):
 
-    queryset = Song.objects.all()
+    queryset = Upload.objects.all()
     serializer_class = SongSerializer
 
 

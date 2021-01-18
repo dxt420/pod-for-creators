@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+
+<!--[if !IE]><!-->
+<html lang="zxx">
+<!--[endif]-->
+
+<head>
+    <meta charset="utf-8" />
+    <title>Tunein Responsive HTML Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="description" content="Tunein,music,song" />
+    <meta name="keywords" content="Tunein,music,song" />
+    <meta name="author" content="" />
+    <meta name="MobileOptimized" content="320" />
+    <!--Template style -->
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/animate.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/fonts.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/flaticon.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/nice-select.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/swiper.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/magnific-popup.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/style.css" />
+     <link rel="stylesheet" type="text/css" href="/static/bl/css/dark_theme.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bl/css/responsive.css" />
+    <!--favicon-->
+	<link rel="shortcut icon" type="image/png" href="/static/bl/images/favicon.png" />
+	
+	<style>
+		@font-face { font-family: 'myfont';
+             src: url('/static/bl/fonts/josefin-sans/JosefinSans-Regular.ttf') format('truetype'); }
+		*{
+			/* font-family: josefin sans,sans-serif !important; */
+
+			font-family: 'myfont';
+		}
+	</style>
+</head>
+
+<body>
+    <!-- preloader Start -->
+    <div id="preloader">
+        <div id="status">
+            <img src="/static/bl/images/loader.gif" id="preloader_image" alt="loader">
+        </div>
+    </div>
+    <div class="cursor"></div>
+    <!-- top navi wrapper Start -->
+    <div class="m24_main_wrapper">
+   
+        
+        <!-- top navi wrapper end -->
+        <div class="m24_navi_main_wrapper index2_main_header index3_main_header m24_cover">
+            <div class="container-fluid">
+                <div class="m24_logo_wrapper">
+                    <div class="m24_logo_div">
+                        <a onclick="load('/static/bl/templates/index.html')" href="#">
+                            <img src="/static/bl/images/logo3.png" alt="logo">
+                        </a>
+                    </div>
+                    
+                </div>
+
+                <div class="m24_header_right_Wrapper d-none d-sm-none d-md-none d-lg-none d-xl-block">
+                    <div class="m24_signin_wrapper">
+						{% if request.user.is_authenticated %}
+						<a href="#" data-toggle="modal" data-target="#account_modal"><img src="/static/bl/images/pf.png" alt="img">
+                            <div class="login_top_wrapper">
+                                <p>MyAccount</p>
+
+                            </div>
+                        </a>
+                        
+						{% else %}
+                        <a href="#" data-toggle="modal" data-target="#login_modal"><img src="/static/bl/images/pf.png" alt="img">
+                            <div class="login_top_wrapper">
+                                <p>login/register</p>
+
+                            </div>
+						</a>
+						{% endif %}
+					
+                    </div>
+                   
+
+                </div>
+
+				<div class="m24_navigation_wrapper">
+                    <div class="mainmenu d-xl-block d-lg-block d-md-none d-sm-none d-none">
+                        <ul class="main_nav_ul">
+    
+                            <li class="has-mega gc_main_navigation"><a href="#" class="gc_main_navigation">browse <i class="flaticon-down-arrow"></i></a>
+                                <ul class="navi_2_dropdown">
+                                    <li class="parent">
+                                        <a href="add_playlist.html"><i class="fas fa-caret-right"></i>Playlists</a>
+                                    </li>
+                                    <li class="parent">
+                                        <a href="artist.html"><i class="fas fa-caret-right"></i>Artists</a>
+                                    </li>
+                                    <li class="parent">
+                                        <a href="genres.html"><i class="fas fa-caret-right"></i>Podcasts</a>
+                                    </li>
+                                    <li class="parent">
+                                        <a href="album.html"><i class="fas fa-caret-right"></i>Albums</a>
+                                    </li>
+                                   
+                                </ul>
+                            </li>
+                          
+    
+                        </ul>
+                    </div>
+                    <div class="navi_searchbar_wrapper">
+                        <i class="flaticon-magnifying-glass"></i>
+                        <form autocomplete="off"> 
+                        <input type="text" autocomplete="none" id="justAnotherInputBox" placeholder="Search for Songs, Artists, Playlists and More.." />
+                            </form>
+                    </div>
+					{% if request.user.is_authenticated %}
+					<div class="m24_navi_langauage_box d-none d-sm-none d-md-none d-lg-none d-xl-block">
+						<div class="lang_list_wrapper">
+							<a href="#" data-toggle="modal" data-target="#myModal">Upload <i class="fas fa-language"></i></a>
+						</div>
+					
+					</div>
+			
+					
+					{% endif %}
+                 
+                </div>
+            </div>
+        </div>
+
+        <!-- navi wrapper End -->
+     
+      <div id="loadedHTML" >
+
+        <div class="main_slider_wrapper slider-area index3_slider_wrapper">
+
+            <div class="slider_headphone">
+                <img src="/static/bl/images/headphone.png" class="img-responsive" alt="img">
+            </div>
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" role="listbox">
+                    <div class="carousel-item active">
+                        <div class="carousel-captions caption-1">
+                            <div class="container jn_container">
+                                <div class="row">
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                        <div class="content">
+
+                                            <h1 data-animation="animated fadeInUp">sound,</h1>
+
+                                            <h2 data-animation="animated fadeInUp">your world</h2>
+                                            <p data-animation="animated fadeInUp">Even while listening to music, simply say “Olivia”
+                                                <br> to interact with Olivia. </p>
+                                            <div class="slider_btn m24_cover">
+                                                <div class="lang_apply_btn">
+                                                    <ul>
+                                                        <li data-animation="animated fadeInUp">
+                                                            <a href="#"> <i class="flaticon-play-button"></i>browse</a>
+                                                        </li>
+                                                    </ul>
+
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                        <div class="content_img_wrapper">
+                                            <img src="/static/bl/images/slider3.png" alt="img">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-captions caption-2">
+                            <div class="container jn_container">
+                                <div class="row">
+
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                        <div class="content">
+
+                                            <h1 data-animation="animated fadeInUp">sound,</h1>
+
+                                            <h2 data-animation="animated fadeInUp">your world</h2>
+                                            <p data-animation="animated fadeInUp">Even while listening to music, simply say “Olivia”
+                                                <br> to interact with Olivia. </p>
+                                            <div class="slider_btn m24_cover">
+                                                <div class="lang_apply_btn">
+                                                    <ul>
+                                                        <li data-animation="animated fadeInUp">
+                                                            <a href="#"> <i class="flaticon-play-button"></i>browse</a>
+                                                        </li>
+                                                    </ul>
+
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                        <div class="content_img_wrapper">
+                                            <img src="/static/bl/images/slider3.png" alt="img">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-captions caption-3">
+                            <div class="container jn_container">
+                                <div class="row">
+
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                        <div class="content">
+
+                                            <h1 data-animation="animated fadeInUp">sound,</h1>
+
+                                            <h2 data-animation="animated fadeInUp">your world</h2>
+                                            <p data-animation="animated fadeInUp">Even while listening to music, simply say “Olivia”
+                                                <br> to interact with Olivia. </p>
+                                            <div class="slider_btn m24_cover">
+                                                <div class="lang_apply_btn">
+                                                    <ul>
+                                                        <li data-animation="animated fadeInUp">
+                                                            <a href="#"> <i class="flaticon-play-button"></i>browse</a>
+                                                        </li>
+                                                    </ul>
+
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                        <div class="content_img_wrapper">
+                                            <img src="/static/bl/images/slider3.png" alt="img">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"><span class="number"></span>
+                        </li>
+                        <li data-target="#carousel-example-generic" data-slide-to="1" class=""><span class="number"></span>
+                        </li>
+                        <li data-target="#carousel-example-generic" data-slide-to="2" class=""><span class="number"></span>
+                        </li>
+                    </ol>
+                    <div class="carousel-nevigation">
+                        <a class="prev" href="#carousel-example-generic" role="button" data-slide="prev"> <span> prev</span> <i class="flaticon-arrow-1"></i>
+                        </a>
+                        <a class="next" href="#carousel-example-generic" role="button" data-slide="next"> <span> next</span> <i class="flaticon-arrow"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+ <!-- treanding song wrapper end -->
+        <!-- download wrapper start -->
+        <div class="download_wrapper m24_cover">
+            <div class="concert_overlay"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                        <div class="download_app_store m24_cover">
+                            <h1>DOWNLOAD THIS APP</h1>
+
+                            <p>There are many variations of passages of Lorem Ipsum available, but passages of Lorem this is wow.</p>
+                            <div class="app_btn m24_cover">
+                                <a href="#">get the app now</a>
+
+                            </div>
+                            <ul class="download_app_logo">
+                                <li><a href="#"><i class="flaticon-android-logo"></i></a></li>
+                                <li><a href="#"><i class="flaticon-apple"></i></a></li>
+                                <li><a href="#"><i class="flaticon-windows"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                        <div class="download_mockup_design m24_cover">
+
+                            <img src="/static/bl/images/mockup.png" class="img-responsive" alt="img">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+      
+        <!-- partners slider  wrapper Start-->
+        <div class="partners_Section index3_partners_section m24_cover">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="partner_slider_wraper index3_partners_slider">
+                            <div class="owl-carousel owl-theme">
+                                <div class="item">
+                                    <div class="lr_prt_img_wrapper">
+                                        <img src="/static/bl/images/part1.png" alt="partner_img">
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="lr_prt_img_wrapper">
+                                        <img src="/static/bl/images/part2.png" alt="partner_img">
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="lr_prt_img_wrapper">
+                                        <img src="/static/bl/images/part3.png" alt="partner_img">
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="lr_prt_img_wrapper">
+                                        <img src="/static/bl/images/part4.png" alt="partner_img">
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="lr_prt_img_wrapper">
+                                        <img src="/static/bl/images/part1.png" alt="partner_img">
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="lr_prt_img_wrapper">
+                                        <img src="/static/bl/images/part2.png" alt="partner_img">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- partners slider  wrapper end-->
+      
+
+      </div>
+    
+
+   
+
+       
+
+        <div class="footer_wrapper index3_footer_wrapper  m24_cover">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 col-12 col-sm-12">
+                        <div class="footer_widget footer_about_wrapper m24_cover">
+                            <div class="wrapper_first_image">
+                                <a href="index.html"><img src="/static/bl/images/logo3.png" class="img-responsive" alt="logo" /></a>
+                            </div>
+                            <div class="abotus_content">
+                                <p>Sed do eiusmod tempor unt ut labore et dolore magna liqua. Ut enim ad minim veniam...</p>
+                            </div>
+                            <ul class="footer_about_link_wrapper index3_footer_abt_link m24_cover">
+                                <li> <i class="fa fa-phone"></i>808 - 111 - 9999</li>
+                                <li> <a href="#"><i class="fa fa-envelope"></i>Tunein@example.com</a></li>
+                                <li> <a href="#"><i class="fas fa-user-alt"></i>Tunein@support.com</a></li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-12 col-sm-12">
+                        <div class="footer_widget footer_blog_wrapper ft_heading m24_cover">
+                            <h4>usefull links</h4>
+                            <ul class="footer_about_link_wrapper usefull_linkx index3_usefull_link m24_cover">
+
+                                <li> <a href="#">Terms of Use</a>
+                                </li>
+                                <li> <a href="#">Privacy Policy </a>
+                                </li>
+                                <li> <a href="#">Feedback </a>
+                                </li>
+
+                                <li> <a href="#">Report an issue </a>
+                                </li>
+                                <li> <a href="#">
+Sitemap </a>
+                                </li>
+                                <li> <a href="#">
+FAQ </a></li>
+                                <li> <a href="#">
+advertise </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-12 col-sm-12">
+                        <div class="footer_widget footer_contact_wrapper ft_heading m24_cover">
+                            <h4>download app </h4>
+                            <p>All type of app’s available for download</p>
+                            <span><a href="#"><img src="/static/bl/images/app_btn1.png" class="img-responsive" alt="img"></a></span>
+                            <span><a href="#"><img src="/static/bl/images/app_btn2.png" class="img-responsive" alt="img"></a></span>
+                            <span><a href="#"><img src="/static/bl/images/app_btn3.png" class="img-responsive" alt="img"></a></span>
+                        </div>
+                    </div>
+				  
+					
+                </div>
+            </div>
+        </div>
+        <div class="foter_top_wrapper index3_index_top_wrapper  m24_cover">
+            <div class="container">
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook-f"></i></a>
+                    </li>
+                    <li><a href="#"><i class="fab fa-twitter"></i></a>
+                    </li>
+                    <li><a href="#"><i class="fab fa-instagram"></i></a>
+                    </li>
+                    <li> <a href="#"><i class="fab fa-linkedin-in"></i></a> </li>
+
+                    <li><a href="#"><i class="fab fa-google-plus-g"></i></a>
+                    </li>
+                    <li><a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </li>
+                    <li><a href="#"><i class="fab fa-tumblr"></i></a>
+                    </li>
+                    <li> <a href="#"><i class="fab fa-behance"></i></a> </li>
+                    <li> <a href="#"><i class="fab fa-dribbble"></i></a> </li>
+                    <li> <a href="#"><i class="fab fa-whatsapp"></i></a> </li>
+                </ul>
+            </div>
+        </div>
+        <div class="section2_bottom_wrapper index3_bottom_footer m24_cover">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                        <div class="btm_foter_box">
+
+                            <p>Copyright © 2019 <a href="index.html"> Tunein </a> Template designed by <a href="#"> Webstrot.</a></p>
+                            <div class="aboutus_social_icons">
+                                <a href="#">Get Tunein <i class="flaticon-play-button"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--footer wrapper end-->
+        <!-- language modal section -->
+    </div>
+    <div class="modal fade lang_m24_banner index3_lang_wrapper" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+
+                        <div class="m24_language_box m24_cover">
+                            <h1>Upload to Pod</h1>
+                            <p>Please select your upload type</p>
+                        </div>
+                        <!-- <div class="lang_list_checkbox">
+                            <ul>
+                                <li>
+                                    <p class="music_field_box">
+                                        <input type="checkbox" id="c1" name="cb">
+                                        <label for="c1">हिंदी <span>Hindi</span>
+                                        </label>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p class="music_field_box">
+                                        <input type="checkbox" id="c2" name="cb">
+                                        <label for="c2">English <span>English</span>
+                                        </label>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p class="music_field_box">
+                                        <input type="checkbox" id="c3" name="cb">
+                                        <label for="c3">पंजाबी <span>Punjabi</span>
+                                        </label>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p class="music_field_box">
+                                        <input type="checkbox" id="c4" name="cb">
+                                        <label for="c4">தமிழ் <span>tamil</span>
+                                        </label>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p class="music_field_box">
+                                        <input type="checkbox" id="c5" name="cb">
+                                        <label for="c5">राजस्थानी <span>Rajasthani</span>
+                                        </label>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p class="music_field_box">
+                                        <input type="checkbox" id="c6" name="cb">
+                                        <label for="c6">हरयाणवी <span>Haryanvi</span>
+                                        </label>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p class="music_field_box">
+                                        <input type="checkbox" id="c7" name="cb">
+                                        <label for="c7">ગુજરાતી <span>Gujarati</span>
+                                        </label>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p class="music_field_box">
+                                        <input type="checkbox" id="c8" name="cb">
+                                        <label for="c8">भोजपुरी <span>Bhojpuri</span>
+                                        </label>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p class="music_field_box">
+                                        <input type="checkbox" id="c9" name="cb">
+                                        <label for="c9">മലയാളം <span>Malayalam</span>
+                                        </label>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p class="music_field_box">
+                                        <input type="checkbox" id="c10" name="cb">
+                                        <label for="c10">मराठी <span>marathi</span>
+                                        </label>
+                                    </p>
+                                </li>
+                            </ul>
+                        </div> -->
+
+						<div>
+                            <div class="row">
+                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
+                                    <div class="treanding_slider_main_box release_box_main_content m24_cover">
+                                        <img src="/static/bl/images/rel.png" alt="img">
+                                        <div class="release_content_artist">
+                                            <p><a href={% url 'bl:upload' %}> Single</a></p> 
+                                            <!-- <p class="various_artist_text"><a href="#">Various Artists</a></p> -->
+                                        </div>
+                                        <div class="m24_treanding_box_overlay release_box_overlay">
+                                            <div class="m24_tranding_box_overlay"></div>
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
+                                    <div class="treanding_slider_main_box release_box_main_content m24_cover">
+                                        <img src="/static/bl/images/rel1.png" alt="img">
+                                        <div class="release_content_artist">
+                                            <p><a href="#">Album / EP</a></p>
+                                            <!-- <p class="various_artist_text"><a href="#">Various Artists</a></p> -->
+                                        </div>
+                                        <div class="m24_treanding_box_overlay release_box_overlay">
+                                            <div class="m24_tranding_box_overlay"></div>
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
+                                    <div class="treanding_slider_main_box release_box_main_content m24_cover">
+                                        <img src="/static/bl/images/rel2.png" alt="img">
+                                        <div class="release_content_artist">
+                                            <p><a href="#">Podcasts</a></p>
+                                            <!-- <p class="various_artist_text"><a href="#">Various Artists</a></p> -->
+                                        </div>
+                                        <div class="m24_treanding_box_overlay release_box_overlay">
+                                            <div class="m24_tranding_box_overlay"></div>
+                                            
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- login register  modal section -->
+    <div class="modal fade lang_m24_banner index3_login_modal" id="login_modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+
+                        <div class="m24_language_box m24_cover">
+                            <h1>Login </h1>
+                            <p>for unlimited music streaming & a personalised experience</p>
+                        </div>
+                       
+                        <div class="lang_apply_btn_wrapper m24_cover">
+                            <div class="lang_apply_btn">
+
+                                <a href="#">Facebook</a>
+
+							</div>
+							<div class="lang_apply_btn">
+
+                                <a href="#">Instagram</a>
+
+							</div>
+							
+							<div class="lang_apply_btn">
+
+                                <a href="{% url 'social:begin' 'google-oauth2' %}"> Google</a>
+
+							</div>
+							<div class="lang_apply_btn">
+
+                                <a href="#"> Twitter</a>
+
+                            </div>
+                          
+                            <div class="dont_have_account m24_cover">
+                                <p>Don’t have an acount ? <a href="#register_modal" data-toggle="modal">register here</a></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+  
+
+
+    <div class="modal fade lang_m24_banner index3_lang_wrapper" id="account_modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+
+                        <div class="mainmenu d-xl-block d-lg-block d-md-none d-sm-none d-none">
+                          
+        
+                                <li class="has-mega gc_main_navigation">
+                                    
+                                    
+                                    <ul class="navi_2_dropdown">
+                                        <li class="parent">
+                                            <a href="#" onclick="load('{% url 'bl:myUploads' %}','/static/bl/templates/myuploads.html')"><i class="fas fa-caret-right"></i>My Uploads</a>
+                                        </li>
+                                        <li class="parent">
+                                            <a href="artist.html"><i class="fas fa-caret-right"></i>My Playlits</a>
+                                        </li>
+                                        <li class="parent">
+                                            <a href="genres.html"><i class="fas fa-caret-right"></i>Following</a>
+                                        </li>
+                                        <li class="parent">
+                                            <a href="album.html"><i class="fas fa-caret-right"></i>Followers</a>
+                                        </li>
+                                        <li class="parent">
+                                            <a href="album_list.html"><i class="fas fa-caret-right"></i>Logout</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                               
+        
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <div class="modal fade lang_m24_banner index3_login_modal" id="register_modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+
+                        <div class="m24_language_box m24_cover">
+                            <h1>Register / Sign Up</h1>
+                            <p>for unlimited music streaming & a personalised experience</p>
+                        </div>
+                        <div class="login_form_wrapper">
+                            <div class="icon_form comments_form">
+
+                                <input type="text" class="form-control" name="first_name" placeholder="Enter your name">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="icon_form comments_form">
+
+                                <input type="text" class="form-control" name="full_name" placeholder="Enter Email Address*">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="icon_form comments_form">
+
+                                <input type="password" class="form-control" placeholder="Enter Password *">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="icon_form comments_form">
+
+                                <input type="password" class="form-control" placeholder="confirm password*">
+                                <i class="fas fa-lock"></i>
+                            </div>
+
+                        </div>
+                        <div class="lang_apply_btn_wrapper m24_cover">
+                            <div class="lang_apply_btn">
+
+                                <a href="#">register</a>
+
+                            </div>
+                            <div class="cancel_wrapper">
+                                <a href="#" class="" data-dismiss="modal">cancel</a>
+                            </div>
+                            <div class="dont_have_account m24_cover">
+                                <p>Don’t have an acount ? <a href="#login_modal" data-toggle="modal">login here</a></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- login register  modal end -->
+   
+    <!--custom js files-->
+    <script src="/static/bl/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/bl/js/bootstrap.min.js"></script>
+    <script src="/static/bl/js/modernizr.js"></script>
+    <script src="/static/bl/js/plugin.js"></script>
+    <script src="/static/bl/js/jquery.nice-select.min.js"></script>
+    <script src="/static/bl/js/jquery.inview.min.js"></script>
+    <script src="/static/bl/js/jquery.magnific-popup.js"></script>
+    <script src="/static/bl/js/swiper.min.js"></script>
+    <script src="/static/bl/js/comboTreePlugin.js"></script>
+    <script src="/static/bl/js/mp3/jquery.jplayer.min.js"></script>
+    <script src="/static/bl/js/mp3/jplayer.playlist.js"></script>
+    <script src="/static/bl/js/owl.carousel.js"></script>
+    <script src="/static/bl/js/mp3/player.js"></script>
+    <script src="/static/bl/js/custom.js"></script>
+    <!-- custom js-->
+
+
+    <script>
+    function makeTextFile(text) {
+                                var data = new Blob([text], {type: 'text/plain'});
+
+                           
+
+                                return window.URL.createObjectURL(data);
+
+                                 
+                            }
+        function load(view){
+           // $('#loadedHTML').load(page);
+
+            
+
+       
+                    $.ajax({
+                        type: 'GET',
+                        url: view,
+                        success: function (data) {
+                            
+                            console.log("pass");
+                          //  console.log(typeof data);
+                          //  console.log(data);
+    						// var scratch = '<form id="songFormer" method="post" enctype="multipart/form-data">{% csrf_token %}  <div class="p-4 d-sm-flex no-shrink b-b"><div class="col-4 d-flex"><div class="avatar-upload"> <div class="avatar-edit"> <input name="imageUpload" id="fileHolder" type="text" ><input type="file"  id="imageUpload" accept=".png, .jpg, .jpeg"/> <label for="imageUpload"></label> </div><div class="avatar-preview"> <div id="imagePreview" style="background-image: url(' + data.image + ');"> </div></div></div></div><div class="col-8 px-sm-4 my-3 my-sm-0 flex"> <div class="form-group row"> <div class="col-sm-12"><label>Title</label><input type="text" name="title" class="form-control" value="'+ data.title +'" placeholder="Name" required> <input type="text" name="songFile" value="'+ value +'">  </div></div><div class="form-group"><label>Description (Optional)</label><textarea class="form-control" rows="6" placeholder="hmm.."></textarea></div><a  onclick="addSong()" class="btn btn-primary">Submit</a> </div><div><a href="#" class="btn btn-icon btn-rounded"><i data-feather="mail"></i> </a><a href="#" class="btn btn-icon btn-rounded"><i data-feather="more-vertical"></i></a></div></div></div></form>';
+                           
+                            //  document.getElementById("former").innerHTML += scratch;
+	
+							//window.location.href = 'editUploads'
+
+                            //$('#loadedHTML').load(data + '');
+                            $('#account_modal').modal('hide')
+                       
+                            $('#loadedHTML').load(makeTextFile(data));
+
+                           
+    
+                               
+    
+                              
+    
+    
+                        },
+                        error: function (data) {
+                            // $("#MESSAGE-DIV").html("Something went wrong!");
+                            console.log("fail");
+    
+                        }
+                    });
+        }
+    </script>
+</body>
+
+</html>
