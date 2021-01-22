@@ -142,7 +142,7 @@ class Playlist(models.Model):
     title = models.CharField(max_length=50,blank=True)
     description = models.CharField(max_length=500,blank=True)
     cover = models.CharField(max_length=150,blank=True)
-    songs = models.ManyToManyField('Upload')
+    songs = models.ManyToManyField('Upload', blank=True)
     status = models.CharField(max_length=50,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
