@@ -11,6 +11,12 @@ urlpatterns = [
     path('artistsongs/<slug:added_by>/',  ArtistSongsView.as_view(), name='artistsongs'),
     path('playlists/', PlaylistCreateView.as_view(), name='listener'),
     path('playlist/<uuid:pk>/',  PlaylistDetailView.as_view(), name='listener_detail'),
+    path('playlistTracks/<uuid:pk>/',  PlaylistTracksView.as_view(), name='playlist_tracks'),
+    # path('playlistTracks/',  PlaylistTracksView.as_view(), name='playlist_tracks'),
+   
+    path('tracks/', TracksView.as_view(), name='tracks'),
+    path('playlist-tracks/<uuid:pk>/',  TracksFilteredByPlaylistView.as_view(), name='playlist_tracks'),
+   
     path('song/<uuid:pk>/',  SongDetailView.as_view(), name='song_detail'),
     path('', include(router.urls))
 ]

@@ -44,7 +44,8 @@ class Upload(models.Model):
     file_url = models.CharField(max_length=150,blank=True)
     reveiwed_by_admin = models.CharField(max_length=50,blank=True)
    
-
+    def __str__(self):
+        return self.file_url
 
 class StreamDetail(models.Model):
     stream_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -106,13 +107,13 @@ class Track(models.Model):
     features = models.CharField(max_length=150,blank=True)
     # features will be many to many also with option to invite 
     # artist thru social media platforms when a signed up artist adding feautures
-
     track_file = models.ForeignKey('Upload', on_delete=models.CASCADE)
     status = models.CharField(max_length=50,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title + ' - ' + self.uploaded_by.creator_name
+
 
 
 class Album(models.Model):
@@ -142,7 +143,7 @@ class Playlist(models.Model):
     title = models.CharField(max_length=50,blank=True)
     description = models.CharField(max_length=500,blank=True)
     cover = models.CharField(max_length=150,blank=True)
-    songs = models.ManyToManyField('Upload', blank=True)
+    songs = models.ManyToManyField('Track', blank=True)
     status = models.CharField(max_length=50,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 

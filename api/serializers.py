@@ -15,6 +15,10 @@ class PlaylistSerializer(serializers.ModelSerializer):
         model = Playlist
         fields = '__all__'
 
+class TrackSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Track
+        fields = '__all__'
 class SongSerializer(serializers.ModelSerializer):
     class Meta:
         model = Upload
